@@ -5,7 +5,7 @@
       nixpkgs = {
         url = "github:NixOS/nixpkgs?ref=master";
       };
-      
+
       nix-darwin = {
         url = "github:LnL7/nix-darwin";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +18,7 @@
       };
 
       nil.url = "github:oxalica/nil";
-     
+
       home-manager = {
         url = "github:nix-community/home-manager/release-23.11";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -54,10 +54,10 @@
         {
           system.configurationRevision = self.rev or self.dirtyRev or null;
         }
-        ./global/default.nix       
+        ./global/default.nix
       ];
-    
-    
+
+
       globalModulesNixos = globalModules ++ [
         ./global/nixos.nix
         #home-manager.nixosModules.default
@@ -69,11 +69,11 @@
      ];
 
       home-manager.enable = true;
-      home-manager.useGlobalPkgs = true;    
+      home-manager.useGlobalPkgs = true;
 
    in
    {
-     nixosConfigurations = {      
+     nixosConfigurations = {
         enterprise = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inputs;

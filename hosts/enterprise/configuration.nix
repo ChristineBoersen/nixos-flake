@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #./xfce-configuration.nix      
+      #./xfce-configuration.nix
       #./icewm-configuration.nix
       #./sway-configuration.nix
       ./kde_plasma6.nix
@@ -35,7 +35,7 @@
   #};
 
   networking.hostName = "enterprise"; # Define your hostname.
-  networking.extraHosts = 
+  networking.extraHosts =
   ''
       192.168.1.83 drydock
       192.168.1.83 drydock.starfleet.local
@@ -90,7 +90,7 @@
     description = "Christine Boersen";
     extraGroups = [ "networkmanager" "wheel" "dialout" "libvirt" ];
     packages = with pkgs; [
-  
+
     ];
   };
 
@@ -99,12 +99,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  
+
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 
     wget
-    git  
+    git
     mdr # Markdown reader
     mc
     nvd
@@ -113,14 +113,14 @@
     dig # nslookup alternative
     ntfs3g  # read/write ntfs volumes
     # mucommander
-    unzip    
+    unzip
     mdr
 
     usbutils
     python3
-  
+
     # Utilities
-    putty
+
     qemu_kvm
 
     virt-manager
@@ -132,13 +132,13 @@
     wine-wayland
     #vulkan-tools
     #clinfo
-    #libsForQt5.kcalc    
+    #libsForQt5.kcalc
     #virtualgl
     #wayland-utils
     virtualbox
-    
 
-    vscodium-fhs    
+
+    vscodium-fhs
     vscode-extensions.antyos.openscad
 
 
@@ -150,7 +150,7 @@
 
 #  Games
     steam
-  ];   
+  ];
 
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -178,10 +178,10 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  #virtualisation = { 
-  #  libvirtd = { 
-  #    enable = true; 
-  #  }; 
+  #virtualisation = {
+  #  libvirtd = {
+  #    enable = true;
+  #  };
   #};
   #programs.virt-manager.enable = true;
   #programs.partition-manager.enable = true;
@@ -200,6 +200,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
-  
+
 
 }
