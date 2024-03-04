@@ -1,14 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 
-
-  if (pkgs.mkIf (system.xserver.enable == true)) {
-     environment.systemPackages = with pkgs; [
-         putty
-
-     ];
-  }
-
+  environment.systemPackages = lib.mkIf (config.services.xserver.enable == true) [
+      pkgs.putty
+      pkgs.freerdp
+    ];
 
 }
