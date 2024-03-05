@@ -49,6 +49,9 @@
     outputs = { self, nixpkgs, nix-darwin, agenix, home-manager, ... }@inputs:
     let
 
+      home-manager.enable = true;
+      home-manager.useGlobalPkgs = true;
+
       # Implement Global settings/home manager defaults for ALL machines by Vendor/Arch
       globalModules = [
         {
@@ -60,23 +63,22 @@
 
       globalModulesNixos = globalModules ++ [
         ./global/nixos.nix
-        #home-manager.nixosModules.default
+        home-manager.nixosModules.default
      ];
 
      globalModulesMacos = globalModules ++ [
        ./global/macos.nix
-       #home-manager.darwinModules.default
+        home-manager.darwinModules.default
      ];
 
-      home-manager.enable = true;
-      home-manager.useGlobalPkgs = true;
+
 
    in
    {
      nixosConfigurations = {
         enterprise = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = inputs;
+          specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
           ++ [ ./hosts/enterprise/configuration.nix ];
        };

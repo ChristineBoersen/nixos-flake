@@ -103,20 +103,6 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 
-    wget
-    git
-    mdr # Markdown reader
-    mc
-    nvd
-    direnv  # used in building
-    openssl
-    dig # nslookup alternative
-    ntfs3g  # read/write ntfs volumes
-    # mucommander
-    unzip
-    mdr
-
-    usbutils
     python3
 
     # Utilities
@@ -129,7 +115,7 @@
 
 
     # WINE and Graphics utils
-    wine-wayland
+    wine #-wayland
     #vulkan-tools
     #clinfo
     #libsForQt5.kcalc
@@ -137,46 +123,24 @@
     #wayland-utils
     virtualbox
 
-
     vscodium-fhs
-    vscode-extensions.antyos.openscad
 
+    libreoffice
 
     prusa-slicer
     freecad
     blender
     openscad
-    libreoffice
+    vscode-extensions.antyos.openscad
+
 
 #  Games
     steam
   ];
 
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs = {
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-    };
-    nano = {
-      enable = true;
-      nanorc = ''
-        set tabstospaces
-        set tabsize 2
-        set linenumbers
-        set trimblanks
-        set unix
-'';
-    };
-  };
-
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   #virtualisation = {
   #  libvirtd = {
