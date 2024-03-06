@@ -2,6 +2,7 @@
 
    description = "nix-configurations";
     inputs = {
+      rootPath = "./.";
       nixpkgs = {
         url = "github:NixOS/nixpkgs?ref=master";
       };
@@ -46,9 +47,9 @@
     };
 
 
-    outputs = { self, nixpkgs, nix-darwin, agenix, home-manager, ... }@inputs:
+    outputs = { self, nixpkgs, nix-darwin, home-manager, ... }@inputs:
     let
-
+      nix.settings.experimental-features = [ "nix-command" "flakes" ];
       home-manager.enable = true;
       home-manager.useGlobalPkgs = true;
 
@@ -63,27 +64,32 @@
 
       globalModulesNixos = globalModules ++ [
         ./global/nixos.nix
-        home-manager.nixosModules.default
+        #home-manager.nixosModules.default
      ];
 
      globalModulesMacos = globalModules ++ [
        ./global/macos.nix
-        home-manager.darwinModules.default
+        #home-manager.darwinModules.default
      ];
-
 
 
    in
    {
      nixosConfigurations = {
-        enterprise = nixpkgs.lib.nixosSystem {
+       christine = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = inputs;   # this is the @inputs from above
+          modules = globalModulesNixos
+          ++ [ ./hardware/wsl2.nix ];
+       };
+       enterprise = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
           ++ [ ./hosts/enterprise/configuration.nix ];
-       };
-     };
-     darwinConfigurations = {
+      };
+    };
+    darwinConfigurations = {
       #hackinfrost = nix-darwin.lib.darwinSystem {
       #   system = "x86_64-darwin";
       #   modules = globalModulesMacos
@@ -94,7 +100,7 @@
       #   modules = globalModulesMacos
       #     ++ [ ./hosts/silicontundra/configuration.nix ];
       # };
-     };
-   };
+    };
+  };
 
- }
+}

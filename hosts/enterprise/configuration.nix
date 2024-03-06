@@ -11,7 +11,7 @@
       #./xfce-configuration.nix
       #./icewm-configuration.nix
       #./sway-configuration.nix
-      ./kde_plasma6.nix
+      ../../modules/desktop-environment/kde_plasma6.nix
     ];
 
   # Bootloader.
@@ -25,14 +25,6 @@
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
   };
-
-  #nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  #nix = {
-    #package = pkgs.nixFlakes;
-    #extraOptions = ''
-    #  experimental-features = nix-command flakes
-    #'';
-  #};
 
   networking.hostName = "enterprise"; # Define your hostname.
   networking.extraHosts =
