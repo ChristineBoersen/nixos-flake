@@ -79,7 +79,7 @@
           system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
-          ++ [ ./hardware/wsl2.nix ];
+          ++ [ ./hosts/christine/configuration.nix ];
        };
        enterprise = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";

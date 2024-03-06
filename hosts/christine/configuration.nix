@@ -18,7 +18,7 @@
 
   environment = {
     systemPackages  = (with pkgs; [    
-      nil  # Nixos Language Server
+      nil  # Nixos Language Server      
     ]);
   };
 
