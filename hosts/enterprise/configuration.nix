@@ -84,6 +84,7 @@
     packages = with pkgs; [
 
     ];
+    passwordFile = "/etc/passwordFile-christine";
   };
 
   # Allow unfree packages

@@ -2,7 +2,6 @@
 
    description = "nix-configurations";
     inputs = {
-      rootPath = "./.";
       nixpkgs = {
         url = "github:NixOS/nixpkgs?ref=master";
       };
