@@ -45,12 +45,18 @@ in {
       displayManager = {
         autoLogin.enable = false;
         defaultSession = "plasma";
-        gdm = {
-          autoSuspend = false;
+        sddm = {
           enable = true;
-          wayland = true;  # Keep matched to defaultsession (if false, plasmax11 would be the defaultSession)
-          banner = "${config.networking.fqdnOrHostName}";
+          wayland = {
+            enable = true;
+          };
         };
+        #gdm = {
+        #  autoSuspend = false;
+        #  enable = true;
+        #  wayland = true;  # Keep matched to defaultsession (if false, plasmax11 would be the defaultSession)
+        #  banner = "${config.networking.fqdnOrHostName}";
+        #};
         sessionCommands = ''
 test -f ~/.xinitrc && . ~/.xinitrc
 '';  # fixes bug where xinit isn't set correctly when homeManager isn't being used
@@ -69,9 +75,9 @@ test -f ~/.xinitrc && . ~/.xinitrc
 
 
 
-  systemd.services = {
-    geoClue.enable = lib.mkForce false;  # No need
-  };
+  #systemd.services = {
+  #  geoClue.enable = lib.mkForce false;  # No need
+  #};
 
   #hardware.pulseaudio.enable = false;
 
@@ -87,9 +93,8 @@ test -f ~/.xinitrc && . ~/.xinitrc
     ];
 
     plasma6.excludePackages = with pkgs.kdePackages; [
-#      plasma-browser-integration
-#      oxygen
-
+      #plasma-browser-integration
+      #oxygen
     ];
 
     # environment.gnome.exlcudePackages   EXCLUDE EXCLUDE EXCLUDE
@@ -97,24 +102,24 @@ test -f ~/.xinitrc && . ~/.xinitrc
 
   };
 
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
-  };
+  #qt = {
+  #  enable = true;
+  #  platformTheme = "gnome";
+  #  style = "adwaita-dark";
+  #};
 
 
   #hardware.opengl.driSupport32Bit = true;
 
 
-  security = {
-    pam.services.gdm.enableGnomeKeyring = true;
-    rtkit.enable = true;
-  };
+  #security = {
+  #  pam.services.sddm.enableGnomeKeyring = true;
+  #  rtkit.enable = true;
+  #};
 
-  users.users.gdm = {
-    extraGroups = [ "video"];  # gdm locks up with blank screen on start without this with xRDP
-  };
+  #users.users.sddm = {
+  #  extraGroups = [ "video"];  # gdm locks up with blank screen on start without this with xRDP
+  #};
 }
 
 

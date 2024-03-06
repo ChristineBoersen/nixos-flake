@@ -77,7 +77,7 @@
   sound.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.mutableUsers = false;
+  #users.mutableUsers = false;
   users.users.christine = {
     isNormalUser = true;
     description = "Christine Boersen";
@@ -85,7 +85,7 @@
     packages = with pkgs; [
 
     ];
-    passwordFile = "/etc/passwordFile-christine";
+    #passwordFile = "/etc/passwordFile-christine";
   };
 
   # Allow unfree packages
