@@ -73,11 +73,11 @@ test -f ~/.xinitrc && . ~/.xinitrc
 
   };
 
+#https://github.com/pjones/plasma-manager/issues/14
 
-
-  #systemd.services = {
-  #  geoClue.enable = lib.mkForce false;  # No need
-  #};
+  systemd.services = {
+    geoClue.enable = lib.mkForce false;  # No need
+  };
 
   #hardware.pulseaudio.enable = false;
 
@@ -95,6 +95,8 @@ test -f ~/.xinitrc && . ~/.xinitrc
     plasma6.excludePackages = with pkgs.kdePackages; [
       #plasma-browser-integration
       #oxygen
+
+
     ];
 
     # environment.gnome.exlcudePackages   EXCLUDE EXCLUDE EXCLUDE

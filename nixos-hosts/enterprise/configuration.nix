@@ -11,8 +11,8 @@
       #./xfce-configuration.nix
       #./icewm-configuration.nix
       #./sway-configuration.nix
-      #../../nixos-modules/desktop-environment/kde_plasma6.nix
-      ../../nixos-configurations/desktop-environment/swayfx.nix
+      ../../nixos-configurations/desktop-environment/kde_plasma6.nix
+      #../../nixos-configurations/desktop-environment/swayfx.nix
     ];
 
   # Bootloader.
