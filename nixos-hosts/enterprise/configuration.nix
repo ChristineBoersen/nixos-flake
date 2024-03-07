@@ -11,13 +11,12 @@
       #./xfce-configuration.nix
       #./icewm-configuration.nix
       #./sway-configuration.nix
-      ../../modules/desktop-environment/kde_plasma6.nix
+      ../../nixos-modules/desktop-environment/kde_plasma6.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
 
   nix.settings = {
     # Enable flakes and new 'nix' command
@@ -101,10 +100,13 @@
 
     # Utilities
 
+    # Virtualisation
     qemu_kvm
-
     virt-manager
     virtiofsd
+    virtualbox
+
+
     etcher
 
 
@@ -115,7 +117,7 @@
     #libsForQt5.kcalc
     #virtualgl
     #wayland-utils
-    virtualbox
+
 
     vscodium-fhs
     nil

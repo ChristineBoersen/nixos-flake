@@ -10,15 +10,13 @@
 {
   imports = [
     # include NixOS-WSL modules
-     <nixos-wsl/modules>
+    ../../hardware/wsl2.nix
   ];
 
-  wsl.enable = true;
-  wsl.defaultUser = "nixos";
 
   environment = {
-    systemPackages  = (with pkgs; [    
-      nil  # Nixos Language Server      
+    systemPackages  = (with pkgs; [
+      nil  # Nixos Language Server
     ]);
   };
 

@@ -396,3 +396,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Disk Images
+*.qcow
+*.qcow2
+*.vhd
+*.vhd[xs]?
+result

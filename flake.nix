@@ -74,20 +74,25 @@
 
    in
    {
+     nixosHosts = nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ./nixos-hosts  );
+
      nixosConfigurations = {
        christine = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
-          ++ [ ./hosts/christine/configuration.nix ];
+          ++ [ ./nixos-hosts/christine/configuration.nix ];
        };
        enterprise = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          #system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
-          ++ [ ./hosts/enterprise/configuration.nix ];
+          ++ [ ./nixos-hosts/enterprise/configuration.nix ];
       };
     };
+
+    macosHosts = nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ./macos-hosts  );
+
     darwinConfigurations = {
       #hackinfrost = nix-darwin.lib.darwinSystem {
       #   system = "x86_64-darwin";
