@@ -45,18 +45,18 @@ in {
       displayManager = {
         autoLogin.enable = false;
         defaultSession = "plasma";
-        sddm = {
-          enable = true;
-          wayland = {
-            enable = true;
-          };
-        };
-        #gdm = {
-        #  autoSuspend = false;
+        #sddm = {
         #  enable = true;
-        #  wayland = true;  # Keep matched to defaultsession (if false, plasmax11 would be the defaultSession)
-        #  banner = "${config.networking.fqdnOrHostName}";
+        #  wayland = {
+        #    enable = true;
+        #  };
         #};
+        gdm = {
+          autoSuspend = false;
+          enable = true;
+          wayland = true;  # Keep matched to defaultsession (if false, plasmax11 would be the defaultSession)
+          banner = "${config.networking.fqdnOrHostName}";
+        };
         sessionCommands = ''
 test -f ~/.xinitrc && . ~/.xinitrc
 '';  # fixes bug where xinit isn't set correctly when homeManager isn't being used
@@ -64,10 +64,10 @@ test -f ~/.xinitrc && . ~/.xinitrc
       };
 
 
-      #xkb = {
-      #  layout = "us";
-      #  variant = "";
-     #};
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
 
     };
 
