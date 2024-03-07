@@ -78,14 +78,20 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   #users.mutableUsers = false;
-  users.users.christine = {
-    isNormalUser = true;
-    description = "Christine Boersen";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "libvirt" ];
-    packages = with pkgs; [
+  users = { 
+    mutableUsers = false;
+    users = {
+      christine = {
+        isNormalUser = true;
+        description = "Christine Boersen";
+        extraGroups = [ "networkmanager" "wheel" "dialout" "libvirt" ];
+        packages = with pkgs; [
 
-    ];
-    #passwordFile = "/etc/passwordFile-christine";
+        ];
+        passwordFile = "/etc/passwordFile-christine";
+      };
+      root.hashedPassword = "!";
+    };
   };
 
   # Allow unfree packages
