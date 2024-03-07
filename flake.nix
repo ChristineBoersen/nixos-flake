@@ -78,7 +78,7 @@
 
      nixosConfigurations = {
        christine = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          #system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
           ++ [ ./nixos-hosts/christine/configuration.nix ];
