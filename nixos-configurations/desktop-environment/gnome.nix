@@ -93,11 +93,16 @@ ResultActive=yes
 
     # environment.systemPackages   INCLUDE INCLUDE INCLUDE
     systemPackages = (with pkgs; [
-      kitty
-      firefox
+
+      chromium
       gnome.gnome-session
       xrdp
       gparted
+      gnome-menus
+
+      gnomeExtensions.dash-to-panel
+      gnomeExtensions.tray-icons-reloaded
+      gnomeExtensions.vitals
     ]);
 
     # environment.gnome.exlcudePackages   EXCLUDE EXCLUDE EXCLUDE
@@ -137,17 +142,37 @@ ResultActive=yes
           settings = with lib.gvariant; {
             "org/gnome/desktop".color-shading-type = "solid";
             "org/gnome/desktop/background".picture-options = "none";
+            "org/gnome/desktop/background".picture-uri = "";
+            "org/gnome/desktop/background".picture-uri-dark = "";
             "org/gnome/desktop/background".primary-color = "#111111";
+            #"org/gnome/desktop/interface".color-theme = "'Adwaita-dark'";
             "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+            #"org/gnome/desktop/interface".cursor-theme = "'Adwaita'";
             "org/gnome/desktop/interface".enable-animations = false;
             "org/gnome/desktop/interface".text-scaling-factor = 1.0;
             "org/gnome/desktop/interface".scaling-factor = 1.0;
             "org/gnome/desktop/interface".overlay-scrolling = false;
-            "org/gnome/desktop/privacy".remember-recent-files = false;
+            "org/gnome/desktop/privacy".remember-recent-files = true;
             "org/gnome/desktop/session".idle-delay = mkUint32 600;
             "org/gnome/desktop/screensaver".lock-delay = mkUint32 30;
+            "org/gnome/desktop/screensaver".picture-uri = "";
+            "org/gnome/desktop/screensaver".picture-uri-dark = "";
+            "org/gnome/desktop/wm/preferences".num-workspaces = "4";
+            "org/gnome/mutter".workspace-only-on-primary = false;
             "org/gnome/shell" = {
-              favorite-apps = [ "org.gnome.Nautilus.desktop" "kitty.desktop" "firefox.desktop" "gparted.desktop" "nixos-manual.desktop" ];
+              disable-user-extensions = false;
+
+              # `gnome-extensions list` for a list
+              enabled-extensions = [
+                #"apps-menu@gnome-shell-extensions.gcampax.github.com"
+                "trayIconsReloaded@selfmade.pl"
+                "Vitals@CoreCoding.com"
+                "dash-to-panel@jderose9.github.com"
+                #"sound-output-device-chooser@kgshank.net"
+                #"space-bar@luchrioh"
+              ];
+
+              favorite-apps = [ "org.gnome.Nautilus.desktop" "org.gnome.Console.desktop" "chromium-browser.desktop" "org.gnome.TextEditor.desktop" ];
             };
             "org/gnome/mutter" = {
                edge-tiling = true;
@@ -174,6 +199,8 @@ ResultActive=yes
               sleep-button-action = "nothing";
               power-button-action = "interactive";
             };
+
+            "org/gnome/system/location".enabled = false;
           };
         }];
       };
