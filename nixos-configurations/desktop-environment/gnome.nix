@@ -98,8 +98,14 @@ ResultActive=yes
       gnome.gnome-session
       xrdp
       gparted
-      gnome-menus
 
+      # to fix menus
+      gettext
+      gnome-menus
+      gnomeExtensions.arcmenu
+      xdg-utils
+
+      # to make a "panel" similar to a windows/traditional desktop
       gnomeExtensions.dash-to-panel
       gnomeExtensions.tray-icons-reloaded
       gnomeExtensions.vitals
@@ -157,6 +163,7 @@ ResultActive=yes
             "org/gnome/desktop/screensaver".lock-delay = mkUint32 30;
             "org/gnome/desktop/screensaver".picture-uri = "";
             "org/gnome/desktop/screensaver".picture-uri-dark = "";
+            "org/gnome/desktop/wm/preferences".button-layout  = "appmenu:minimize,maximize,close";
             "org/gnome/desktop/wm/preferences".num-workspaces = "4";
             "org/gnome/mutter".workspace-only-on-primary = false;
             "org/gnome/shell" = {
@@ -173,6 +180,13 @@ ResultActive=yes
               ];
 
               favorite-apps = [ "org.gnome.Nautilus.desktop" "org.gnome.Console.desktop" "chromium-browser.desktop" "org.gnome.TextEditor.desktop" ];
+            };
+            "org/gnome/shell/extensions/dash-to-panel" = {
+                panel-sizes = "{'0': 32}";
+                panel-element-positions = ''
+ '{"0":[{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+'';
+                secondarymenu-contains-showdetails = true;
             };
             "org/gnome/mutter" = {
                edge-tiling = true;
@@ -208,8 +222,8 @@ ResultActive=yes
   };
 
   security = {
-    pam.services.gdm.enableGnomeKeyring = true;
-    rtkit.enable = true;
+    pam.services.gdm.enableGnomeKeyring = true;  # fixes extra loogin prompt during login via GDM
+    rtkit.enable = true;  # needed to support DCONF + DBUS
   };
 
   users.users.gdm = {
