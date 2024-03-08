@@ -48,7 +48,8 @@
 
     outputs = { self, nixpkgs, nix-darwin, home-manager, ... }@inputs:
     let
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+
       home-manager.enable = true;
       home-manager.useGlobalPkgs = true;
 
@@ -75,16 +76,16 @@
    in
    {
      nixosHosts = nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ./nixos-hosts  );
-
+     # refactor to loop nixosHosts
      nixosConfigurations = {
        christine = nixpkgs.lib.nixosSystem {
-          #system = "x86_64-linux";
+          system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
           ++ [ ./nixos-hosts/christine/configuration.nix ];
        };
        enterprise = nixpkgs.lib.nixosSystem {
-          #system = "x86_64-linux";
+          system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
           ++ [ ./nixos-hosts/enterprise/configuration.nix ];

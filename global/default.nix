@@ -1,39 +1,44 @@
 { config, pkgs, lib, ... }:
 
 {
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 
   environment.systemPackages = with pkgs; [
 
-    direnv  # used in building
+    dig         # nslookup replacement (since legacy network tools are gone now)
+
+    direnv      # used in building
     git
 
-    nano  # included by default, listed for clarity
+    mdr         # Markdown reader
+    mc          # Midnight Commander tui/cli file management
 
-    mdr # Markdown reader
-    mc  # Midnight Commander tui/cli file management
-    nvd  # nixos version diff tool
+    nano        # included by default, listed for clarity
 
-    openssl  # don't assume packages bring in their own
-    dig      # nslookup replacement (since legacy network tools are gone now)
-    ntfs3g   # read/write ntfs volumes
+    ntfs3g      # read/write ntfs volumes
+    nvd         # nixos version diff tool
 
-    unzip
+    openssl     # don't assume packages bring in their own
+
     usbutils
-    vim   # some products assume VI/VIM exists (VSCode)
+    unzip
+    vim         # some products assume VI/VIM exists (VSCode)
     wget
 
   ];
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs = {
-    gnupg.agent = {
+    gnupg.agent =  lib.mkDefault {
       enable = true;
       enableSSHSupport = true;
     };
-    nano = {
+    nano =  lib.mkDefault {
       enable = true;
       nanorc = ''
         set jumpyscrolling
@@ -53,6 +58,23 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+# Select internationalisation properties.
+  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = lib.mkDefault {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
+  # Set your time zone.
+  time.timeZone =  lib.mkDefault "America/New_York";
 
 
 
