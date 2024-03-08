@@ -2,9 +2,10 @@
 { config, pkgs, lib, ... }:
 
 {
-
+  
   boot.loader.systemd-boot.enable = lib.mkDefault true;
   boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
+
 # Enable networking
   networking.networkmanager.enable = lib.mkDefault true;
   networking.networkmanager.wifi.powersave = lib.mkDefault false;

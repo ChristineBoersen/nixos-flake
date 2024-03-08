@@ -46,7 +46,7 @@
     };
 
 
-    outputs = { self, nixpkgs, nix-darwin, home-manager, ... }@inputs:
+    outputs = { self, nixpkgs, nix-darwin, nixos-wsl, home-manager, ... }@inputs:
     let
 
 
