@@ -94,21 +94,24 @@ ResultActive=yes
     # environment.systemPackages   INCLUDE INCLUDE INCLUDE
     systemPackages = (with pkgs; [
 
+      alacritty
       chromium
       gnome.gnome-session
       xrdp
       gparted
 
+
+
       # to fix menus
-      gettext
-      gnome-menus
-      gnomeExtensions.arcmenu
-      xdg-utils
+      #gettext
+      #gnome-menus
+      #catppuccin-gtk
+      #xdg-utils
 
       # to make a "panel" similar to a windows/traditional desktop
-      gnomeExtensions.dash-to-panel
-      gnomeExtensions.tray-icons-reloaded
-      gnomeExtensions.vitals
+      #gnomeExtensions.dash-to-panel
+
+      #gnomeExtensions.vitals
     ]);
 
     # environment.gnome.exlcudePackages   EXCLUDE EXCLUDE EXCLUDE
@@ -116,6 +119,7 @@ ResultActive=yes
     gnome.excludePackages = ( with pkgs; [
       # gnome-photos
       geoclue2
+      gnome-console
       gnome-tour
       snapshot
     ]) ++ (with pkgs.gnome; [
@@ -123,6 +127,7 @@ ResultActive=yes
       gnome-calendar
       gnome-characters
       # gnome-color-manager
+
       gnome-contacts
       gnome-maps
       gnome-music
@@ -159,7 +164,7 @@ ResultActive=yes
             "org/gnome/desktop/interface".scaling-factor = 1.0;
             "org/gnome/desktop/interface".overlay-scrolling = false;
             "org/gnome/desktop/privacy".remember-recent-files = true;
-            "org/gnome/desktop/session".idle-delay = mkUint32 600;
+            "org/gnome/desktop/session".idle-delay = mkUint32 900;
             "org/gnome/desktop/screensaver".lock-delay = mkUint32 30;
             "org/gnome/desktop/screensaver".picture-uri = "";
             "org/gnome/desktop/screensaver".picture-uri-dark = "";
@@ -171,20 +176,18 @@ ResultActive=yes
 
               # `gnome-extensions list` for a list
               enabled-extensions = [
-                #"apps-menu@gnome-shell-extensions.gcampax.github.com"
-                "trayIconsReloaded@selfmade.pl"
                 "Vitals@CoreCoding.com"
                 "dash-to-panel@jderose9.github.com"
                 #"sound-output-device-chooser@kgshank.net"
                 #"space-bar@luchrioh"
               ];
 
-              favorite-apps = [ "org.gnome.Nautilus.desktop" "org.gnome.Console.desktop" "chromium-browser.desktop" "org.gnome.TextEditor.desktop" ];
+              favorite-apps = [ "org.gnome.Nautilus.desktop" "Alacritty.desktop" "chromium-browser.desktop" "org.gnome.TextEditor.desktop" ];
             };
             "org/gnome/shell/extensions/dash-to-panel" = {
                 panel-sizes = "{'0': 32}";
                 panel-element-positions = ''
- '{"0":[{"element":"leftBox","visible":true,"position":"stackedTL"},{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+ '{"0":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
 '';
                 secondarymenu-contains-showdetails = true;
             };
