@@ -176,20 +176,13 @@ ResultActive=yes
 
               # `gnome-extensions list` for a list
               enabled-extensions = [
-                "Vitals@CoreCoding.com"
-                "dash-to-panel@jderose9.github.com"
+                #"Vitals@CoreCoding.com"
+                #"dash-to-panel@jderose9.github.com"
                 #"sound-output-device-chooser@kgshank.net"
                 #"space-bar@luchrioh"
               ];
 
-              favorite-apps = [ "org.gnome.Nautilus.desktop" "Alacritty.desktop" "chromium-browser.desktop" "org.gnome.TextEditor.desktop" ];
-            };
-            "org/gnome/shell/extensions/dash-to-panel" = {
-                panel-sizes = "{'0': 32}";
-                panel-element-positions = ''
- '{"0":[{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
-'';
-                secondarymenu-contains-showdetails = true;
+              favorite-apps = [ "org.gnome.Nautilus.desktop" "org.gnome.Console.desktop" "chromium-browser.desktop" "org.gnome.TextEditor.desktop" ];
             };
             "org/gnome/mutter" = {
                edge-tiling = true;
@@ -225,8 +218,8 @@ ResultActive=yes
   };
 
   security = {
-    pam.services.gdm.enableGnomeKeyring = true;  # fixes extra loogin prompt during login via GDM
-    rtkit.enable = true;  # needed to support DCONF + DBUS
+    pam.services.gdm.enableGnomeKeyring = true;
+    rtkit.enable = true;
   };
 
   users.users.gdm = {
