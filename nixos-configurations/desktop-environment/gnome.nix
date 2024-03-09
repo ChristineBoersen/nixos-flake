@@ -94,24 +94,15 @@ ResultActive=yes
     # environment.systemPackages   INCLUDE INCLUDE INCLUDE
     systemPackages = (with pkgs; [
 
-      alacritty
       chromium
       gnome.gnome-session
       xrdp
       gparted
+      gnome-menus
 
-
-
-      # to fix menus
-      #gettext
-      #gnome-menus
-      #catppuccin-gtk
-      #xdg-utils
-
-      # to make a "panel" similar to a windows/traditional desktop
-      #gnomeExtensions.dash-to-panel
-
-      #gnomeExtensions.vitals
+      gnomeExtensions.dash-to-panel
+      gnomeExtensions.tray-icons-reloaded
+      gnomeExtensions.vitals
     ]);
 
     # environment.gnome.exlcudePackages   EXCLUDE EXCLUDE EXCLUDE
@@ -119,7 +110,6 @@ ResultActive=yes
     gnome.excludePackages = ( with pkgs; [
       # gnome-photos
       geoclue2
-      gnome-console
       gnome-tour
       snapshot
     ]) ++ (with pkgs.gnome; [
@@ -127,7 +117,6 @@ ResultActive=yes
       gnome-calendar
       gnome-characters
       # gnome-color-manager
-
       gnome-contacts
       gnome-maps
       gnome-music
@@ -164,11 +153,10 @@ ResultActive=yes
             "org/gnome/desktop/interface".scaling-factor = 1.0;
             "org/gnome/desktop/interface".overlay-scrolling = false;
             "org/gnome/desktop/privacy".remember-recent-files = true;
-            "org/gnome/desktop/session".idle-delay = mkUint32 900;
+            "org/gnome/desktop/session".idle-delay = mkUint32 600;
             "org/gnome/desktop/screensaver".lock-delay = mkUint32 30;
             "org/gnome/desktop/screensaver".picture-uri = "";
             "org/gnome/desktop/screensaver".picture-uri-dark = "";
-            "org/gnome/desktop/wm/preferences".button-layout  = "appmenu:minimize,maximize,close";
             "org/gnome/desktop/wm/preferences".num-workspaces = "4";
             "org/gnome/mutter".workspace-only-on-primary = false;
             "org/gnome/shell" = {
@@ -176,8 +164,10 @@ ResultActive=yes
 
               # `gnome-extensions list` for a list
               enabled-extensions = [
-                #"Vitals@CoreCoding.com"
-                #"dash-to-panel@jderose9.github.com"
+                #"apps-menu@gnome-shell-extensions.gcampax.github.com"
+                "trayIconsReloaded@selfmade.pl"
+                "Vitals@CoreCoding.com"
+                "dash-to-panel@jderose9.github.com"
                 #"sound-output-device-chooser@kgshank.net"
                 #"space-bar@luchrioh"
               ];
