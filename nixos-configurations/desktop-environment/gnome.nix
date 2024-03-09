@@ -98,7 +98,7 @@ ResultActive=yes
       gnome.gnome-session
       xrdp
       gparted
-      gnome-menus
+      #gnome-menus
 
       gnomeExtensions.dash-to-panel
       gnomeExtensions.tray-icons-reloaded
@@ -145,20 +145,28 @@ ResultActive=yes
             "org/gnome/desktop/background".picture-uri = "";
             "org/gnome/desktop/background".picture-uri-dark = "";
             "org/gnome/desktop/background".primary-color = "#111111";
-            #"org/gnome/desktop/interface".color-theme = "'Adwaita-dark'";
-            "org/gnome/desktop/interface".color-scheme = "prefer-dark";
-            #"org/gnome/desktop/interface".cursor-theme = "'Adwaita'";
-            "org/gnome/desktop/interface".enable-animations = false;
-            "org/gnome/desktop/interface".text-scaling-factor = 1.0;
-            "org/gnome/desktop/interface".scaling-factor = 1.0;
-            "org/gnome/desktop/interface".overlay-scrolling = false;
+            "org/gnome/desktop/interface" = {
+              color-scheme = "prefer-dark";
+              document-font-name = "Cantarell 12";
+              enable-animations = false;
+              monospace-font-name = "Source Code Pro 12";
+              overlay-scrolling = false;
+              text-scaling-factor = 1.0;
+              scaling-factor = 1.0;
+            };
             "org/gnome/desktop/privacy".remember-recent-files = true;
             "org/gnome/desktop/session".idle-delay = mkUint32 600;
             "org/gnome/desktop/screensaver".lock-delay = mkUint32 30;
             "org/gnome/desktop/screensaver".picture-uri = "";
             "org/gnome/desktop/screensaver".picture-uri-dark = "";
+            "org/gnome/desktop/wm/preferences".button-layout  = "appmenu:minimize,maximize,close";
             "org/gnome/desktop/wm/preferences".num-workspaces = "4";
-            "org/gnome/mutter".workspace-only-on-primary = false;
+            "org/gnome/nautilus/preferences".default-folder-viewer = "list-view";
+            "org/gnome/nautilus/list-view" = {
+              default-zoom-level = "small";
+              default-column-order = [ "name" "size" "type" "owner" "group" "permissions" "date_modified" "where" "date_modified_with_time" "date_accessed" "date_created" "recency" "detailed_type" ];
+              default-visible-columns = [ "name" "size" "date_modified" "where" ];
+            };
             "org/gnome/shell" = {
               disable-user-extensions = false;
 
@@ -173,6 +181,13 @@ ResultActive=yes
               ];
 
               favorite-apps = [ "org.gnome.Nautilus.desktop" "org.gnome.Console.desktop" "chromium-browser.desktop" "org.gnome.TextEditor.desktop" ];
+            };
+            "org/gnome/shell/extensions/dash-to-panel" = {
+                panel-sizes = "{'0': 32}";
+                panel-element-positions = ''
+ '{"0":[{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+'';
+                secondarymenu-contains-showdetails = true;
             };
             "org/gnome/mutter" = {
                edge-tiling = true;
