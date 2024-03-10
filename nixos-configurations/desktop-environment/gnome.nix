@@ -154,6 +154,10 @@ ResultActive=yes
               text-scaling-factor = 1.0;
               scaling-factor = 1.0;
             };
+            "org/gnome/desktop/media-handling" = {
+                autorun-never = true;
+                autorun-x-content-ignore = [ "x-content/unix-software" "x-content/image-dcf" "x-content/audio-player" "x-content/video-dvd" "x-content/audio-cdda" "x-content/audio-dvd" ];
+            };
             "org/gnome/desktop/privacy".remember-recent-files = true;
             "org/gnome/desktop/session".idle-delay = mkUint32 600;
             "org/gnome/desktop/screensaver".lock-delay = mkUint32 30;
