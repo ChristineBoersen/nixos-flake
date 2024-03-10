@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -124,6 +124,21 @@
   virtualisation = {
     libvirtd = {
       enable = true;
+    };
+  };
+
+  programs = {
+    dconf = {
+      enable = true;
+      profiles = {
+        user.databases = [{
+          settings = with lib.gvariant; {
+            "org/gnome/shell/extensions/dash-to-panel" = {
+              panel-lengths = "{'0':50}";   # very large 5K monitor, so limiting to 50% makes sense
+            };
+          };
+        }];
+      };
     };
   };
 
