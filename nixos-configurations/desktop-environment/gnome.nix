@@ -220,6 +220,12 @@ ResultActive=yes
             };
 
             "org/gnome/system/location".enabled = false;
+
+            "org.gnome.TextEditor" = {
+              indent-style = "space";
+              show-line-numbers = true;
+              tab-width = "4";
+            };
           };
         }];
       };
