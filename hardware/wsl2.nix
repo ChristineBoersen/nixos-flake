@@ -10,7 +10,8 @@
 {
   imports = [
     # include NixOS-WSL modules
-   
+    #"${modulesPath}/profiles/minimal.nix" # This one is already there when you install NixOS
+    #../nixos-conf/dev-env/nix-ld.nix
     nixos-wsl.nixosModules.wsl
   ];
 
@@ -18,7 +19,7 @@
   wsl.enable = true;
   wsl.defaultUser = "nixos";
 
-
+  #nix-ld-config.enable = true;
 
   environment = {
     systemPackages  = (with pkgs; [    

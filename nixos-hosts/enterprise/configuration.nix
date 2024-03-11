@@ -11,8 +11,8 @@
       #./xfce-configuration.nix
       #./icewm-configuration.nix
       #./sway-configuration.nix
-      #../../nixos-configurations/desktop-environment/kde_plasma6.nix
-      ../../nixos-configurations/desktop-environment/gnome.nix
+      #../../nixos-conf/desk-env/kde_plasma6.nix
+      ../../nixos-conf/desk-env/gnome.nix
     ];
 
 

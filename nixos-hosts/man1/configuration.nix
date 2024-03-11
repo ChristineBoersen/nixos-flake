@@ -10,8 +10,8 @@
       ./hardware-configuration.nix
       ../../hardware/hyperv.nix
       #./gnome-configuration.nix
-      ../../nixos-configurations/netbox-configuration.nix
-      ../../nixos-configurations/ansible-configuration.nix
+      ../../nixos-conf/netbox-configuration.nix
+      ../../nixos-conf/ansible-configuration.nix
       #./ansible-semaphore-configuration.nix
       #./simple-nixos-mailserver-configuration.nix
       #./zabbix-configuration.nix
