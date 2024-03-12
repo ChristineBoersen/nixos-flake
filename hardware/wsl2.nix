@@ -9,7 +9,7 @@
 
 {
   imports = [
-    # include NixOS-WSL modules  
+    # include NixOS-WSL modules   
     nixos-wsl.nixosModules.wsl
   ];
 
@@ -20,7 +20,7 @@
   #nix-ld-config.enable = true;
 
   environment = {
-    systemPackages  = (with pkgs; [    
+    systemPackages  = (with pkgs; [
       #nil  # Nixos Language Server
     ]);
   };
