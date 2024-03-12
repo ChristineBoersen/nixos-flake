@@ -3,7 +3,7 @@
    description = "nix-configurations";
     inputs = {
       nixpkgs = {
-        url = "github:NixOS/nixpkgs?ref=master";
+        url = "github:NixOS/nixpkgs?ref=nixpkgs-unstable";
       };
 
       nix-darwin = {

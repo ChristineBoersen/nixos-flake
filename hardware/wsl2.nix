@@ -9,9 +9,7 @@
 
 {
   imports = [
-    # include NixOS-WSL modules
-    #"${modulesPath}/profiles/minimal.nix" # This one is already there when you install NixOS
-    #../nixos-conf/dev-env/nix-ld.nix
+    # include NixOS-WSL modules  
     nixos-wsl.nixosModules.wsl
   ];
 
