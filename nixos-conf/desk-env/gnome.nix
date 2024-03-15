@@ -1,7 +1,16 @@
-{ config, lib, pkgs, options, ... }:
+{ config, lib, pkgs, nix-colors, home-manager, options, ... }:
 
 
 {
+
+  imports = [
+    nix-colors.homeManagerModules.default
+    #home-manager.nixosModules.home-manager
+  ];
+
+  #programs.home-manager.enable = true;
+
+  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
   # part of plasma package wrapping an application uses this (chromium, etc)
   nixpkgs.config.permittedInsecurePackages = [
@@ -31,8 +40,8 @@
 
     xrdp = {
       defaultWindowManager = "/run/current-system/sw/bin/gnome-session";
-      enable = true;
-      openFirewall = true;
+      enable = lib.mkDefault true;
+      openFirewall = lib.mkDefault true;
     };
 
     xserver = {
@@ -101,8 +110,10 @@ ResultActive=yes
       #gnome-menus
 
       gnomeExtensions.dash-to-panel
-      gnomeExtensions.tray-icons-reloaded
-      gnomeExtensions.vitals
+      #gnomeExtensions.tray-icons-reloaded
+      #gnomeExtensions.vitals
+
+      wl-clipboard-x11   # terminal copy/paste from clipboard to wayland
     ]);
 
     # environment.gnome.exlcudePackages   EXCLUDE EXCLUDE EXCLUDE
@@ -147,13 +158,15 @@ ResultActive=yes
             "org/gnome/desktop/background".primary-color = "#111111";
             "org/gnome/desktop/interface" = {
               color-scheme = "prefer-dark";
-              document-font-name = "Cantarell 12";
+              document-font-name = "Cantarell 11";
               enable-animations = false;
-              monospace-font-name = "Source Code Pro 12";
+              monospace-font-name = "Source Code Pro 11";
               overlay-scrolling = false;
               text-scaling-factor = 1.0;
               scaling-factor = 1.0;
             };
+
+            # Being extra extra extra sure we don't autorun when media is inserted
             "org/gnome/desktop/media-handling" = {
                 autorun-never = true;
                 autorun-x-content-ignore = [ "x-content/unix-software" "x-content/image-dcf" "x-content/audio-player" "x-content/video-dvd" "x-content/audio-cdda" "x-content/audio-dvd" ];
@@ -177,8 +190,8 @@ ResultActive=yes
               # `gnome-extensions list` for a list
               enabled-extensions = [
                 #"apps-menu@gnome-shell-extensions.gcampax.github.com"
-                "trayIconsReloaded@selfmade.pl"
-                "Vitals@CoreCoding.com"
+                #"trayIconsReloaded@selfmade.pl"
+                #"Vitals@CoreCoding.com"
                 "dash-to-panel@jderose9.github.com"
                 #"sound-output-device-chooser@kgshank.net"
                 #"space-bar@luchrioh"
@@ -213,18 +226,21 @@ ResultActive=yes
             };
 
             "org/gnome/settings-daemon/plugins/power" = {         # Suspend only on battery power, not while charging.
-              sleep-inactive-ac-timeout = "0";
+              sleep-inactive-ac-timeout = mkUint32 0;
               sleep-inactive-ac-type = "nothing";
               sleep-button-action = "nothing";
               power-button-action = "interactive";
             };
 
-            "org/gnome/system/location".enabled = false;
+            "org/gnome/system/location" = {
+              enabled = false;
+              max-accuracy-level = "country";  # just in case it gets turned on, overrides the default of "exact"
+            };
 
             "org.gnome.TextEditor" = {
               indent-style = "space";
               show-line-numbers = true;
-              tab-width = "4";
+              tab-width = mkUint32 4;
             };
           };
         }];

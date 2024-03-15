@@ -13,6 +13,7 @@
       #./sway-configuration.nix
       #../../nixos-conf/desk-env/kde_plasma6.nix
       ../../nixos-conf/desk-env/gnome.nix
+      #../../nixos-conf/desk-env/lxqt.nix
     ];
 
 

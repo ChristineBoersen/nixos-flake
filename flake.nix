@@ -43,15 +43,17 @@
       agenix.url = "github:ryantm/agenix";
       agenix.inputs.nixpkgs.follows = "nixpkgs";
 
+      nix-colors = {
+        url = "github:misterio77/nix-colors";
+      };
+
     };
 
 
-    outputs = { self, nixpkgs, nix-darwin, nixos-wsl, home-manager, ... }@inputs:
+    outputs = { self, nixpkgs, nix-darwin, nixos-wsl, home-manager, nix-colors, ... }@inputs:
     let
 
-
-      home-manager.enable = true;
-      home-manager.useGlobalPkgs = true;
+      #inherit home-manager;
 
       # Implement Global settings/home manager defaults for ALL machines by Vendor/Arch
       globalModules = [
@@ -88,7 +90,9 @@
           system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
-          ++ [ ./nixos-hosts/enterprise/configuration.nix ];
+          ++ [
+              ./nixos-hosts/enterprise/configuration.nix
+            ];
       };
     };
 
