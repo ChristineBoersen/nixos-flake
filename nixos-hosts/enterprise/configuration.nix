@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, fetchFromGitLab, ... }:
 
 {
   imports =
@@ -78,7 +78,7 @@
 
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    openrgb
+    #openrgb-with-all-plugins
     
     python3
     #cantarell-fonts
@@ -128,20 +128,21 @@
       enable = true;
     };
   };
+  
+  # nixpkgs.overlays = [ (final: prev:   
+  #   /* overlay goes here */  
+  #   {
+  #     openrgb = prev.openrgb.overrideAttrs (old: {
+  #       src = prev.fetchFromGitLab {
+  #         owner = "CalcProgrammer1";
+  #         repo = "OpenRGB";
+  #         rev = "5532e2e290a91527620fbc801fc9d4d94882a1b7";
+  #         sha256 = "sha256-LCdQLv8K7AjBTXuVoiYGCzTpbnmlHxzz+2FhxbKcY7g=";
+  #       };  
+  #     });     
+  #   })
+  # ];
 
-  programs = {
-    dconf = {
-      enable = true;
-      profiles = {
-        user.databases = [{
-          settings = with lib.gvariant; {
-            "org/gnome/shell/extensions/dash-to-panel" = {
-              panel-lengths = "{'0':50}";   # very large 5K monitor, so limiting to 50% makes sense
-            };
-          };
-        }];
-      };
-    };
-  };
+  
 
 }
