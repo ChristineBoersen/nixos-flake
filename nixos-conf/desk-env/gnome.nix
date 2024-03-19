@@ -1,16 +1,16 @@
 { config, lib, pkgs, nix-colors, home-manager, options, ... }:
 
 
-{
+with lib; {
 
   imports = [
-    nix-colors.homeManagerModules.default
+    #nix-colors.homeManagerModules.default
     #home-manager.nixosModules.home-manager
   ];
 
   #programs.home-manager.enable = true;
 
-  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
+  #colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
   # part of plasma package wrapping an application uses this (chromium, etc)
   nixpkgs.config.permittedInsecurePackages = [
@@ -18,11 +18,11 @@
   ];
 
   services = {
-    avahi.enable = lib.mkDefault false;  # Media discovery not needed
-    geoclue2.enable = lib.mkForce false;  # Location services not needed
+    avahi.enable = mkDefault false;  # Media discovery not needed
+    geoclue2.enable = mkForce false;  # Location services not needed
     gnome = {
-       games.enable = lib.mkDefault false;
-       evolution-data-server.enable = lib.mkForce false;
+       games.enable = mkDefault false;
+       evolution-data-server.enable = mkForce false;
     };
 
     pipewire = {
@@ -40,8 +40,8 @@
 
     xrdp = {
       defaultWindowManager = "/run/current-system/sw/bin/gnome-session";
-      enable = lib.mkDefault true;
-      openFirewall = lib.mkDefault true;
+      enable = mkDefault true;
+      openFirewall = mkDefault true;
     };
 
     xserver = {
@@ -81,7 +81,7 @@ test -f ~/.xinitrc && . ~/.xinitrc
   };
 
   systemd.services = {
-    geoClue.enable = lib.mkForce false;  # No need
+    geoClue.enable = mkForce false;  # No need
   };
 
   hardware.pulseaudio.enable = false;
@@ -104,12 +104,12 @@ ResultActive=yes
     systemPackages = (with pkgs; [
 
       chromium
-      gnome.gnome-session
-      xrdp
+      #gnome.gnome-session
+      #xrdp
       gparted
       #gnome-menus
 
-      gnomeExtensions.dash-to-panel
+      #gnomeExtensions.dash-to-panel
       #gnomeExtensions.tray-icons-reloaded
       #gnomeExtensions.vitals
 
@@ -150,7 +150,7 @@ ResultActive=yes
       enable = true;
       profiles = {
         user.databases = [{
-          settings = with lib.gvariant; {
+          settings = with gvariant; {
             "org/gnome/desktop".color-shading-type = "solid";
             "org/gnome/desktop/background".picture-options = "none";
             "org/gnome/desktop/background".picture-uri = "";
@@ -189,23 +189,22 @@ ResultActive=yes
 
               # `gnome-extensions list` for a list
               enabled-extensions = [
-                #"apps-menu@gnome-shell-extensions.gcampax.github.com"
+                "apps-menu@gnome-shell-extensions.gcampax.github.com"
                 #"trayIconsReloaded@selfmade.pl"
                 #"Vitals@CoreCoding.com"
-                "dash-to-panel@jderose9.github.com"
+                #"dash-to-panel@jderose9.github.com"
                 #"sound-output-device-chooser@kgshank.net"
                 #"space-bar@luchrioh"
               ];
 
               favorite-apps = [ "org.gnome.Nautilus.desktop" "org.gnome.Console.desktop" "chromium-browser.desktop" "org.gnome.TextEditor.desktop" ];
             };
-            "org/gnome/shell/extensions/dash-to-panel" = {
-                panel-sizes = "{'0': 32}";
-                panel-element-positions = ''
- '{"0":[{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
-'';
-                secondarymenu-contains-showdetails = true;
-            };
+ #           "org/gnome/shell/extensions/dash-to-panel" = {                
+                #panel-element-positions = ''
+# '{"0":[{"element":"leftBox","visible":false,"position":"stackedTL"},{"element":"showAppsButton","visible":true,"position":"stackedTL"},{"element":"activitiesButton","visible":false,"position":"stackedTL"},{"element":"taskbar","visible":true,"position":"stackedTL"},{"element":"centerBox","visible":true,"position":"centered"},{"element":"dateMenu","visible":true,"position":"stackedBR"},{"element":"rightBox","visible":true,"position":"stackedBR"},{"element":"systemMenu","visible":true,"position":"stackedBR"},{"element":"desktopButton","visible":true,"position":"stackedBR"}]}'
+#'';
+ #               secondarymenu-contains-showdetails = true;
+ #           };
             "org/gnome/mutter" = {
                edge-tiling = true;
                attach-modal-dialogs = true;

@@ -7,13 +7,13 @@
 
 { config, lib, pkgs, nixos-wsl, ... }:
 
-{
+with lib; {
   imports = [
-    # include NixOS-WSL modules   
+    # include NixOS-WSL modules
     nixos-wsl.nixosModules.wsl
   ];
 
-  boot.loader.systemd-boot.enable = lib.mkForce false;  #wsl doesn't "boot" per se even with systemd enabled, this conflicts
+  boot.loader.systemd-boot.enable = mkForce false;  #wsl doesn't "boot" per se even with systemd enabled, this conflicts
   wsl.enable = true;
   wsl.defaultUser = "nixos";
 

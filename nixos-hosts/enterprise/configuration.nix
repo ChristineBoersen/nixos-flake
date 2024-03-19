@@ -11,8 +11,8 @@
       #./xfce-configuration.nix
       #./icewm-configuration.nix
       #./sway-configuration.nix
-      #../../nixos-conf/desk-env/kde_plasma6.nix
-      ../../nixos-conf/desk-env/gnome.nix
+      ../../nixos-conf/desk-env/kde_plasma6.nix
+      #../../nixos-conf/desk-env/gnome.nix
       #../../nixos-conf/desk-env/lxqt.nix
     ];
 
@@ -65,7 +65,7 @@
         packages = with pkgs; [
 
         ];
-        passwordFile = "/etc/passwordFile-christine";
+        hashedPasswordFile = "/etc/passwordFile-christine";
       };
       root.hashedPassword = "!";
     };
@@ -78,7 +78,8 @@
 
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-
+    openrgb
+    
     python3
     #cantarell-fonts
     # Utilities

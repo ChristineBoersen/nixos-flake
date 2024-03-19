@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
-{
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+with lib; {
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = with pkgs; [
 
@@ -34,11 +34,11 @@
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs = {
-    gnupg.agent =  lib.mkDefault {
+    gnupg.agent =  mkDefault {
       enable = true;
       enableSSHSupport = true;
     };
-    nano =  lib.mkDefault {
+    nano =  mkDefault {
       enable = true;
       nanorc = ''
         set jumpyscrolling
@@ -59,9 +59,9 @@
   services.openssh.enable = true;
 
 # Select internationalisation properties.
-  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+  i18n.defaultLocale = mkDefault "en_US.UTF-8";
 
-  i18n.extraLocaleSettings = lib.mkDefault {
+  i18n.extraLocaleSettings = mkDefault {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
     LC_MEASUREMENT = "en_US.UTF-8";
@@ -74,7 +74,7 @@
   };
 
   # Set your time zone.
-  time.timeZone =  lib.mkDefault "America/New_York";
+  time.timeZone =  mkDefault "America/New_York";
 
 
 
