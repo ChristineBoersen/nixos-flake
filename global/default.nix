@@ -20,7 +20,7 @@ with lib; {
     nvd         # nixos version diff tool
 
     openssl     # don't assume packages bring in their own
-
+    powershell  # so we can keep one scripting language, mostly
     usbutils
     unzip
     vim         # some products assume VI/VIM exists (VSCode)

@@ -81,6 +81,7 @@
     #openrgb-with-all-plugins
     
     python3
+    vscode-extensions.ms-vscode.powershell
     #cantarell-fonts
     # Utilities
 
