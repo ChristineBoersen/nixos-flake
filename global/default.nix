@@ -15,7 +15,8 @@ with lib; {
     mc          # Midnight Commander tui/cli file management
 
     nano        # included by default, listed for clarity
-
+    nixfmt
+    
     ntfs3g      # read/write ntfs volumes
     nvd         # nixos version diff tool
 
@@ -37,7 +38,7 @@ with lib; {
     gnupg.agent =  mkDefault {
       enable = true;
       enableSSHSupport = true;
-    };
+    };  
     nano =  mkDefault {
       enable = true;
       nanorc = ''

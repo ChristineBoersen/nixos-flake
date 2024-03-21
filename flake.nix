@@ -74,29 +74,44 @@
         #home-manager.darwinModules.default
      ];
 
+     nixosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./nixos-hosts  )));
+     macosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./macos-hosts  )));
 
    in
    {
-     nixosHosts = nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ./nixos-hosts  );
-     # refactor to loop nixosHosts
-     nixosConfigurations = {
-       christine = nixpkgs.lib.nixosSystem {
+     
+      nixosConfigurations = (nixpkgs.lib.listToAttrs (nixpkgs.lib.lists.forEach nixosHosts (n:
+       { 
+        name = "${n}";
+        value = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
-          ++ [ ./nixos-hosts/christine/configuration.nix ];
-       };
-       enterprise = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = inputs;   # this is the @inputs from above
-          modules = globalModulesNixos
-          ++ [
-              ./nixos-hosts/enterprise/configuration.nix
-            ];
-      };
-    };
+          ++ [ ./nixos-hosts/${n}/configuration.nix ];
+        };
+       }
+     )));
+    
 
-    macosHosts = nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ./macos-hosts  );
+     # refactor to loop nixosHosts
+    #  nixosConfigurations = {
+    #    christine = nixpkgs.lib.nixosSystem {
+    #       system = "x86_64-linux";
+    #       specialArgs = inputs;   # this is the @inputs from above
+    #       modules = globalModulesNixos
+    #       ++ [ ./nixos-hosts/christine/configuration.nix ];
+    #    };
+    #    enterprise = nixpkgs.lib.nixosSystem {
+    #       system = "x86_64-linux";
+    #       specialArgs = inputs;   # this is the @inputs from above
+    #       modules = globalModulesNixos
+    #       ++ [
+    #           ./nixos-hosts/enterprise/configuration.nix
+    #         ];
+    #   };
+    # };
+
+    
 
     darwinConfigurations = {
       #hackinfrost = nix-darwin.lib.darwinSystem {
