@@ -75,21 +75,21 @@
      ];
 
      # produces a list of folder numbers in nixos-hosts and macos-hosts
-     nixosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./nixos-hosts  )));
+     nixosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./nixos-hosts  ))); 
      macosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./macos-hosts  )));
 
    in
    {
      
       # instead of explicitly lists hosts like most examples do, we iterate nixosHosts to convert to an attrSet and output a nixosSystem
-      nixosConfigurations = (nixpkgs.lib.listToAttrs (nixpkgs.lib.lists.forEach nixosHosts (n:
+      nixosConfigurations = (nixpkgs.lib.listToAttrs (nixpkgs.lib.lists.forEach nixosHosts (hostName:
        { 
-        name = "${n}";
+        name = "${hostName}";
         value = nixpkgs.lib.nixosSystem {
           #system = "x86_64-linux";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesNixos
-          ++ [ ./nixos-hosts/${n}/configuration.nix ];
+          ++ [ ./nixos-hosts/${hostName}/configuration.nix ];
         };
        }
      )));
@@ -114,14 +114,14 @@
     # };
 
     # instead of explicitly lists hosts like most examples do, we iterate nixosHosts to convert to an attrSet and output a nixosSystem
-      darwinConfigurations = (nixpkgs.lib.listToAttrs (nixpkgs.lib.lists.forEach macosHosts (n:
+      darwinConfigurations = (nixpkgs.lib.listToAttrs (nixpkgs.lib.lists.forEach macosHosts (hostName:
        { 
-        name = "${n}";
+        name = "${hostName}";
         value = nixpkgs.lib.nixosSystem {
           #system = "x86_64-darwin";
           specialArgs = inputs;   # this is the @inputs from above
           modules = globalModulesMacos
-          ++ [ ./macos-hosts/${n}/configuration.nix ];
+          ++ [ ./macos-hosts/${hostName}/configuration.nix ];
         };
        }
      )));
