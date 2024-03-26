@@ -73,32 +73,20 @@
        ./global/macos.nix
         #home-manager.darwinModules.default
      ];
-
     
-    
-    getHostPath = searchPath: (
-      let 
-        inherit searchPath;
-        
-        getDirNames = searchPath: (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  searchPath  )));
-        hasSubDir = name: ( builtins.any ( getDirNames "${searchPath}/${name}" ));
+    getDirNames = searchPath: (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  searchPath  )));
+    hasSubDir = searchPath: dirName: ( builtins.any ( getDirNames "${searchPath}/${dirName}" ));
+    getHostPaths = searchPath: 
+      let             
         hostsOrDomains = getDirNames searchPath; 
-
-        domains = builtins.filter 
-          (name: hasSubDir name)
-          hostsOrDomains;
-      in
-      {
-        builtins.filter 
-          (name: (hasSubDir name) == false) 
-          hostsOrDomains
-        ++ map 
-            (dirname: ( getDirNames "${dirname}/${( getDirNames  "./${searchPath}/${dirname}" )}"  )) 
-            domains
-      }
-    );
-     # produces a list of folder names in nixos-hosts and macos-hosts
+        domains = builtins.filter (name: hasSubDir searchPath name) hostsOrDomains;
+      in {
+        hosts = builtins.filter (name: !(hasSubDir searchPath name) ) hostsOrDomains
+                  ++ map (domain: ( getDirNames "./${searchPath}/${domain}" )) domains;                  
+      };
     
+     # produces a list of folder names in nixos-hosts and macos-hosts
+
     nixosHosts = getHostPaths "./nixos-hosts";
     macosHosts = getHostPaths "./macos-hosts";
 
