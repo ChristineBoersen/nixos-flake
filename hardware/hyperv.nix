@@ -1,12 +1,10 @@
 
 { config, lib, pkgs, ... }:
 
-with lib; {
-  imports = [
+{
+  imports = [];
 
-  ];
-
-   mkIf (virtualisation.hypervGuest.enable == true) {
+  lib.mkIf (virtualisation.hypervGuest.enable == true) {
 
       virtualisation.hypervGuest.videoMode = mkDefault "1600x900"
 
@@ -14,9 +12,7 @@ with lib; {
       boot.kernel.sysctl."vm.overcommit_memory" = "1"; # https://github.com/NixOS/nix/issues/421;
 
       environment = {
-        systemPackages  = (with pkgs; [
-
-        ]);
+        systemPackages  = (with pkgs; []);
       };
       nixpkgs.hostPlatform = lib.mkForce "x86_64-linux";
    };
