@@ -75,8 +75,13 @@
      ];
 
      # produces a list of folder numbers in nixos-hosts and macos-hosts
-     nixosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./nixos-hosts  ))); 
-     macosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./macos-hosts  )));
+    nixosHostsOrDomains = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  ./nixos-hosts  ))); 
+
+    nixosDomains = filter name: ( any nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ( "./nixos-hosts/${name}" )) nixosHostsOrDomains;
+    nixosHosts = filter name: ( any nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ( "./nixos-hosts/${name}" ) == false) nixosHostsOrDomains
+      ++ map dirname: (dirname + "/" + (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  ( "./nixos-hosts/${dirname}" )  )))) nixosDomains;
+
+    macosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  ./macos-hosts  )));
 
    in
    {
