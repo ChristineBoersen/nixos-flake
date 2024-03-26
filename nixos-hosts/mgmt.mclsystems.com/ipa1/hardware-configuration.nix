@@ -36,7 +36,7 @@
     ipv4 = {
       addresses = [
         {
-          address = "10.250.0.4"
+          address = "10.250.0.4";
           prefixLength = 24;
         }
       ];
