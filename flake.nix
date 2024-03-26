@@ -74,30 +74,52 @@
         #home-manager.darwinModules.default
      ];
 
-     # produces a list of folder numbers in nixos-hosts and macos-hosts
-    nixosHostsOrDomains = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  ./nixos-hosts  ))); 
+    
+    
+    getHostPath = searchPath: (
+      let 
+        inherit searchPath;
+        
+        getDirNames = searchPath: (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  searchPath  )));
 
-    nixosDomains = filter name: ( any nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ( "./nixos-hosts/${name}" )) nixosHostsOrDomains;
-    nixosHosts = filter name: ( any nixpkgs.lib.filterAttrs (n: v: v == "directory") builtins.readDir ( "./nixos-hosts/${name}" ) == false) nixosHostsOrDomains
-      ++ map dirname: (dirname + "/" + (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  ( "./nixos-hosts/${dirname}" )  )))) nixosDomains;
+        hostsOrDomains = getDirNames searchPath; 
 
-    macosHosts = (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  ./macos-hosts  )));
+        domains = builtins.filter 
+          (name: ( builtins.any ( getDirNames "${searchPath}/${name}" ))) 
+          hostsOrDomains;
+      in
+        builtins.filter 
+          (name: ( builtins.any  ( getDirNames "./${searchPath}}/${name}" ) == false))
+          hostsOrDomains
+        ++ map 
+            (dirname: ( getDirNames "${dirname}/${( getDirNames  "./${searchPath}/${dirname}" )}"  )) 
+            domains;
+
+    );
+     # produces a list of folder names in nixos-hosts and macos-hosts
+    
+    nixosHosts = getHostPaths "./nixos-hosts";
+    macosHosts = getHostPaths "./macos-hosts";
 
    in
    {
      
       # instead of explicitly lists hosts like most examples do, we iterate nixosHosts to convert to an attrSet and output a nixosSystem
-      nixosConfigurations = (nixpkgs.lib.listToAttrs (nixpkgs.lib.lists.forEach nixosHosts (hostName:
-       { 
-        name = "${hostName}";
-        value = nixpkgs.lib.nixosSystem {
-          #system = "x86_64-linux";
-          specialArgs = inputs;   # this is the @inputs from above
-          modules = globalModulesNixos
-          ++ [ ./nixos-hosts/${hostName}/configuration.nix ];
-        };
-       }
-     )));
+      nixosConfigurations = (nixpkgs.lib.listToAttrs 
+        (
+          nixpkgs.lib.lists.forEach nixosHosts 
+          (
+            hostName: { 
+              name = "${hostName}";
+              value = nixpkgs.lib.nixosSystem {          
+                specialArgs = inputs;   # this is the @inputs from above
+                modules = globalModulesNixos
+                ++ [ ./nixos-hosts/${hostName}/configuration.nix ];
+              };
+            }
+          )
+        )
+    );
     
 
     # Keep this as example of manual configuration. The forEach above replaces the need for manually specifying
