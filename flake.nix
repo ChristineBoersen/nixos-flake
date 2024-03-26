@@ -88,13 +88,14 @@
           (name: ( builtins.any ( getDirNames "${searchPath}/${name}" ))) 
           hostsOrDomains;
       in
+      {
         builtins.filter 
           (name: ( builtins.any  ( getDirNames "./${searchPath}}/${name}" ) == false))
           hostsOrDomains
         ++ map 
             (dirname: ( getDirNames "${dirname}/${( getDirNames  "./${searchPath}/${dirname}" )}"  )) 
-            domains;
-
+            domains
+      }
     );
      # produces a list of folder names in nixos-hosts and macos-hosts
     
