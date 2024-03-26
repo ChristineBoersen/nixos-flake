@@ -12,10 +12,6 @@
       ../../../nixos-conf/sys-man/freeipa.nix
     ];
 
-
-  boot.kernel.sysctl."vm.overcommit_memory" = "1"; # https://github.com/NixOS/nix/issues/421;
-
-
   # Enable networking
   networking.hostName = "ipa1"; # Define your hostname.
   networking.domain = "mgmt.mclsystems.com";
