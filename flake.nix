@@ -81,16 +81,16 @@
         inherit searchPath;
         
         getDirNames = searchPath: (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  searchPath  )));
-
+        hasSubDir = name: ( builtins.any ( getDirNames "${searchPath}/${name}" ));
         hostsOrDomains = getDirNames searchPath; 
 
         domains = builtins.filter 
-          (name: ( builtins.any ( getDirNames "${searchPath}/${name}" ))) 
+          (name: hasSubDir name)
           hostsOrDomains;
       in
       {
         builtins.filter 
-          (name: ( builtins.any  ( getDirNames "./${searchPath}}/${name}" ) == false))
+          (name: (hasSubDir name) == false) 
           hostsOrDomains
         ++ map 
             (dirname: ( getDirNames "${dirname}/${( getDirNames  "./${searchPath}/${dirname}" )}"  )) 
