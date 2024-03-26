@@ -51,21 +51,7 @@
           via = "10.250.0.1";
         }
       ];
-    };
-    ipv6 = {
-      addresses = [
-        {
-          address = "0:0:0:0:0:FFFF:0afa0004";  # 96bit IPv4/6 prefix + 10.250.0.4 in hex
-          prefixLength = 96;
-        }
-      ];
-      routes = [
-        {
-          address = "0:0:0:0:0:FFFF";
-          prefixLength =96;
-        }        
-      ];
-    };
+    };    
   };
   # networking.interfaces.eth0.useDHCP = lib.mkDefault true;
 

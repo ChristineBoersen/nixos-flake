@@ -30,14 +30,6 @@
   sound.enable = lib.mkForce false;
 
   security = {
-#    pki.certificateFiles = [ "/var/lib/dc1-mclsystems-com.pem"   ];
-#pki.certificates = [''
-#mclsystems.com
-#-----BEGIN CERTIFICATE-----
-REDACTED
-#-----END CERTIFICATE-----
-#
-#''];
     sudo.extraConfig = ''
     Defaults:ALL timestamp_timeout=15
     mcladmin  ALL=(ALL) NOPASSWD: ALL
