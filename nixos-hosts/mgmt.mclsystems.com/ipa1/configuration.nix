@@ -8,8 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../hardware/hyperv.nix
-      ../../nixos-conf/sys-man/freeipa.nix
+      ../../../hardware/hyperv.nix
+      ../../../nixos-conf/sys-man/freeipa.nix
     ];
 
 

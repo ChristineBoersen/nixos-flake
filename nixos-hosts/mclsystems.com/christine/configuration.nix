@@ -10,7 +10,7 @@
 {
   imports = [
     # include NixOS-WSL modules
-    ../../hardware/wsl2.nix
+    ../../../hardware/wsl2.nix
   ];
 
 

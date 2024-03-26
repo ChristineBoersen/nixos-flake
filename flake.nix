@@ -74,21 +74,40 @@
         #home-manager.darwinModules.default
      ];
     
-    getDirNames = searchPath: (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  searchPath  )));
-    hasSubDir = searchPath: dirName: ( builtins.any ( getDirNames "${searchPath}/${dirName}" ));
-    getHostPaths = searchPath: 
-      let             
-        hostsOrDomains = getDirNames searchPath; 
-        domains = builtins.filter (name: hasSubDir searchPath name) hostsOrDomains;
-      in {
-        hosts = builtins.filter (name: !(hasSubDir searchPath name) ) hostsOrDomains
-                  ++ map (domain: ( getDirNames "./${searchPath}/${domain}" )) domains;                  
-      };
+    listDirsRecursive =
+      # The path to recursively list
+      dir: maxdepth:
+      nixpkgs.lib.flatten (nixpkgs.lib.mapAttrsToList (name: type:
+        if type == "directory" && maxdepth > 0 then
+          listDirsRecursive (dir + "/${name}") (builtins.sub maxdepth 1)
+        else
+          dir + "/${name}"
+        ) (builtins.readDir dir));
+
+    parsePath = path: ([{ hostName = "${baseNameOf path}"; name = "${baseNameOf (dirOf path)}/${baseNameOf path}"; path = path; }]);
+    getHostPaths = path:(
+      nixpkgs.lib.lists.flatten ((map 
+        (path: parsePath path)  
+        (nixpkgs.lib.lists.flatten (listDirsRecursive path 1)))
+      )
+    );
+    #getDirNames = searchPath: (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  searchPath  )));
+    #getDirNameWithParentPath = searchPath: nixpkgs.lib.lists.forEach (getDirNames searchPath) (dirName: "${builtins.dirOf "${searchPath}/${dirName}"}/${dirName}");
+    #hasSubDir = searchPath: dirName:  builtins.any (test: test != []) ( getDirNames "${searchPath}/${dirName}" );
+    #getHostPaths = searchPath: 
+    #  let             
+    #    hostsOrDomains = getDirNames searchPath; 
+    #    domains = builtins.filter (hostOrDomain: hasSubDir searchPath hostOrDomain) hostsOrDomains;
+    #    hosts = builtins.filter (hostOrDomain: !(hasSubDir searchPath hostOrDomain) ) hostsOrDomains;
+    #  in 
+    #    hosts ++  (map (domain: ( getDirNameWithParentPath ("${searchPath}/${domain}") )) domains);
+      
     
      # produces a list of folder names in nixos-hosts and macos-hosts
 
-    nixosHosts = getHostPaths "./nixos-hosts";
-    macosHosts = getHostPaths "./macos-hosts";
+    nixosHosts = (getHostPaths ./nixos-hosts);
+    macosHosts = (getHostPaths ./macos-hosts);
+    
 
    in
    {
@@ -98,18 +117,18 @@
         (
           nixpkgs.lib.lists.forEach nixosHosts 
           (
-            hostName: { 
-              name = "${hostName}";
+            host: { 
+              name = host.name;
               value = nixpkgs.lib.nixosSystem {          
                 specialArgs = inputs;   # this is the @inputs from above
                 modules = globalModulesNixos
-                ++ [ ./nixos-hosts/${hostName}/configuration.nix ];
+                  ++ [ ./nixos-hosts/${host.name}/configuration.nix ];
               };
             }
           )
         )
     );
-    
+   
 
     # Keep this as example of manual configuration. The forEach above replaces the need for manually specifying
     #  nixosConfigurations = {

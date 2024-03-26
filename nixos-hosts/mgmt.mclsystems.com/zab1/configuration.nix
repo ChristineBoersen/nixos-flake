@@ -8,11 +8,11 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../hardware/hyperv.nix
+      ../../../hardware/hyperv.nix
       #./gnome-configuration.nix      
       #./ansible-semaphore-configuration.nix
       #./simple-nixos-mailserver-configuration.nix
-      ./zabbix-configuration.nix
+      ../../../nixos-conf/zabbix-configuration.nix
     ];
 
 
