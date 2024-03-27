@@ -9,9 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../../hardware/hyperv.nix
-      #./gnome-configuration.nix      
-      #./ansible-semaphore-configuration.nix
-      #./simple-nixos-mailserver-configuration.nix
+      ../../../nixos-conf/desk-env/kde_plasma6.nix
       ../../../nixos-conf/zabbix-configuration.nix
     ];
 

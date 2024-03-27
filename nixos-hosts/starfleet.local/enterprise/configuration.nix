@@ -7,13 +7,8 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      #./xfce-configuration.nix
-      #./icewm-configuration.nix
-      #./sway-configuration.nix
-      ../../../nixos-conf/desk-env/kde_plasma6.nix
-      #../../nixos-conf/desk-env/gnome.nix
-      #../../nixos-conf/desk-env/lxqt.nix
+      ./hardware-configuration.nix      
+      ../../../nixos-conf/desk-env/kde_plasma6.nix     
     ];
 
 
