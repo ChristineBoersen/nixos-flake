@@ -91,18 +91,7 @@
         (nixpkgs.lib.lists.flatten (listDirsRecursive path 1)))
       )
     );
-    #getDirNames = searchPath: (nixpkgs.lib.attrNames ( nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir  searchPath  )));
-    #getDirNameWithParentPath = searchPath: nixpkgs.lib.lists.forEach (getDirNames searchPath) (dirName: "${builtins.dirOf "${searchPath}/${dirName}"}/${dirName}");
-    #hasSubDir = searchPath: dirName:  builtins.any (test: test != []) ( getDirNames "${searchPath}/${dirName}" );
-    #getHostPaths = searchPath: 
-    #  let             
-    #    hostsOrDomains = getDirNames searchPath; 
-    #    domains = builtins.filter (hostOrDomain: hasSubDir searchPath hostOrDomain) hostsOrDomains;
-    #    hosts = builtins.filter (hostOrDomain: !(hasSubDir searchPath hostOrDomain) ) hostsOrDomains;
-    #  in 
-    #    hosts ++  (map (domain: ( getDirNameWithParentPath ("${searchPath}/${domain}") )) domains);
-      
-    
+       
      # produces a list of folder names in nixos-hosts and macos-hosts
 
     nixosHosts = (getHostPaths ./nixos-hosts);
