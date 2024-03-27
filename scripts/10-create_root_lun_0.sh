@@ -9,7 +9,8 @@ while true; do
     export drv=(/dev/disk/by-path/acpi-VMBUS\:00-vmbus-*-lun-0)
     export drvp1=("$drv-part1")
     export drvp2=("$drv-part2")
-    sudo sfdisk -X gpt -w always --delete $drv
+    echo -e 'label: gpt' | sudo sfdisk $drv
+    #sudo sfdisk -X gpt -w always --delete $drv
     sudo sfdisk --disk-id  $drv $(uuidgen)
     echo -e 'size=500M, type=U, name=NIXBOOT\nsize=+, type=L, name=NIXROOT\n' | sudo sfdisk $drv
     sudo sfdisk -l
