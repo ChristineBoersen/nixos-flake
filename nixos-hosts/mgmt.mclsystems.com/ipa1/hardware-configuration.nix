@@ -11,12 +11,12 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
+  fileSystems."/" = lib.mkDefault
     { device = "/dev/disk/by-uuid/fdd9ef33-ce20-4b8c-bb39-3501e5166c10";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
+  fileSystems."/boot" = lib.mkDefault
     { device = "/dev/disk/by-uuid/56E2-CA79";
       fsType = "vfat";
     };
