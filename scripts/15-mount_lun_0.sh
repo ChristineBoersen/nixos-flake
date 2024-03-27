@@ -17,10 +17,10 @@ while true; do
     sudo mkdir -p /mnt/boot
     sudo mount /dev/disk/by-label/NIXBOOT /mnt/boot
 
-    sudo dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=2097152
-    sudo chmod 600 /mnt/.swapfile
-    sudo mkswap /mnt/.swapfile
-    sudo swapon /mnt/.swapfile
+    #sudo dd if=/dev/zero of=/mnt/.swapfile bs=1024 count=2097152
+    #sudo chmod 600 /mnt/.swapfile
+    #sudo mkswap /mnt/.swapfile
+    #sudo swapon /mnt/.swapfile
     break
   elif [ "$mountpart" == "n" ]
   then

@@ -12,12 +12,16 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = lib.mkDefault
-    { device = "/dev/disk/by-uuid/fdd9ef33-ce20-4b8c-bb39-3501e5166c10";
+    { 
+      device = "/dev/disk/by-label/NIXROOT";
+      #device = "/dev/disk/by-uuid/fdd9ef33-ce20-4b8c-bb39-3501e5166c10";
       fsType = "ext4";
     };
 
   fileSystems."/boot" = lib.mkDefault
-    { device = "/dev/disk/by-uuid/56E2-CA79";
+    { 
+      device = "/dev/disk/by-label/NIXBOOT";  
+      #device = "/dev/disk/by-uuid/56E2-CA79";
       fsType = "vfat";
     };
 
@@ -36,23 +40,28 @@
     ipv4 = {
       addresses = [
         {
-          address = "10.250.0.4";
+          address = "10.240.0.8";
           prefixLength = 24;
         }
       ];
       routes = [
         {
-          address = "10.250.0.0";
+          address = "10.240.0.0";
           prefixLength = 24;
         }
         {
           address = "0.0.0.0";       
           prefixLength = 0;
-          via = "10.250.0.1";
+          via = "10.240.0.1";
         }
       ];
     };    
   };
+  networking.nameservers = [
+    "10.240.0.3"
+    "10.240.0.128"
+    "10.240.0.4"
+  ];
   # networking.interfaces.eth0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
