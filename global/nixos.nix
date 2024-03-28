@@ -19,7 +19,7 @@ with lib; {
 
   ];
 
-  
+   nixpkgs.config.allowUnfree = true;
 
   systemd.sleep.extraConfig = mkDefault ''
     AllowSuspend=no
