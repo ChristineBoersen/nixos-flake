@@ -85,9 +85,9 @@
     virt-manager
     virtiofsd
     virtualbox
-    teamviewer
+    #teamviewer
 
-    etcher
+    #etcher
 
 
     # WINE and Graphics utils
