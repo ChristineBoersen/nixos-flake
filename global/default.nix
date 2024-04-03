@@ -9,6 +9,7 @@ with lib; {
     dig         # nslookup replacement (since legacy network tools are gone now)
 
     direnv      # used in building
+    getent      # linux passwd/group/etc db viewer
     git
 
     mdr         # Markdown reader
