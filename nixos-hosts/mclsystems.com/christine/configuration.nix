@@ -9,6 +9,8 @@
 
 {
   imports = [
+    # WSL doesn't need a hardware-configuration.nix since it shares resources with host
+    #./hardware-configuration.nix
     # include NixOS-WSL modules
     ../../../hardware/wsl2.nix
   ];
