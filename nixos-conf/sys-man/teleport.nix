@@ -21,5 +21,6 @@
 
   };
 
+   services.teleport.enable = true;
 
 }
