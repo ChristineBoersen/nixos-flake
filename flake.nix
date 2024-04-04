@@ -4,7 +4,7 @@
     inputs = {
       nixpkgs = {
         #url = "github:NixOS/nixpkgs/staging-next";
-        url = "github:NixOS/nixpkgs?ref=nixpkgs-unstable";
+        url = "github:NixOS/nixpkgs?ref=nixpkgs-unstable#e976fa8f49c3";
       };
 
       nix-darwin = {
