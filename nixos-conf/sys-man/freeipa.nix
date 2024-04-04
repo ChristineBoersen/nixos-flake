@@ -21,5 +21,5 @@
 
   };
 
-
+  security.ipa.enable = true;
 }
