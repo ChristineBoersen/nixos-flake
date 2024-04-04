@@ -14,7 +14,7 @@
     ];
 
   # Enable networking
-  networking.hostName = "ipa1"; # Define your hostname.
+  networking.hostName = lib.mkForce "ipa1"; # Define your hostname.
   networking.domain = "mgmt.mclsystems.com";
 
   # Open ports in the firewall.
