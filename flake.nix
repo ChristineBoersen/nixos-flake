@@ -7,11 +7,6 @@
         url = "github:NixOS/nixpkgs?ref=nixpkgs-unstable";
       };
 
-      nixpkgs-stable = {
-        #url = "github:NixOS/nixpkgs/staging-next";
-        url = "github:NixOS/nixpkgs/nixos-23.11";
-      };
-
       nix-darwin = {
         url = "github:LnL7/nix-darwin";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -46,7 +41,7 @@
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
-      agenix.url = "github:ryantm/agenix";      
+      agenix.url = "github:ryantm/agenix";
       agenix.inputs.nixpkgs.follows = "nixpkgs";
 
       nix-colors = {
@@ -56,7 +51,7 @@
     };
 
 
-    outputs = { self, nixpkgs, nixpkgs-stable, nix-darwin, nixos-wsl, home-manager, nix-colors, ... }@inputs:
+    outputs = { self, nixpkgs, nix-darwin, nixos-wsl, home-manager, nix-colors, ... }@inputs:
     let
 
       #inherit home-manager;
