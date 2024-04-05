@@ -75,6 +75,24 @@ with lib; {
     LC_TIME = "en_US.UTF-8";
   };
 
+  security.pki.certficates = [
+''
+RootCA mgmt.mclsystems.com
+===================
+-----BEGIN CERTIFICATE-----
+MIIBkDCCATWgAwIBAgIQc4q+F5NPovuEKTocQ2wjXTAKBggqhkjOPQQDAjAlMSMw
+IQYDVQQDDBpSb290Q0FfbWdtdC5tY2xzeXN0ZW1zLmNvbTAgFw0yNDA0MDUxODI4
+NDhaGA8yMjAwMDEwMTA0NTk1OVowJTEjMCEGA1UEAwwaUm9vdENBX21nbXQubWNs
+c3lzdGVtcy5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASdRBHaj38hQH6s
+slh8gvsb7YJ1OAknYrRk2O8mWHVOJCzNA1WaNADsCgXa5YkQ1ZJ6oTI/0hDTwDFf
+icjH0CU0o0UwQzAOBgNVHQ8BAf8EBAMCAQYwEgYDVR0TAQH/BAgwBgEB/wIBATAd
+BgNVHQ4EFgQUXUoqFLO3Z3giU5Il0ZCRyv0wGDEwCgYIKoZIzj0EAwIDSQAwRgIh
+AIYvMwLZsghEZ9w4OnDnzEBbnAMFFT68wgqnHq+JXLqFAiEAr6EFRiTLgFTCBbuU
+BUHUdC6HxbjSI1ZKlKc0RRLJqkQ=
+-----END CERTIFICATE-----
+''
+  ];
+  
   # Set your time zone.
   time.timeZone =  mkDefault "America/New_York";
 
