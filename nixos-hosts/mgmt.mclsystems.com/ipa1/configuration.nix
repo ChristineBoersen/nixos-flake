@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ../../../hardware/hyperv.nix
       ../../../nixos-conf/desk-env/kde_plasma6.nix
-      ../../../nixos-conf/sys-man/freeipa.nix
+      # ../../../nixos-conf/sys-man/freeipa.nix
     ];
 
   # Enable networking
@@ -57,7 +57,7 @@
 
   # environment.systemPackages   INCLUDE INCLUDE INCLUDE  #Add your packages here
   systemPackages = (with pkgs; [
-
+      step-ca step-cli 
     ]);
   };
 
