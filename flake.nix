@@ -9,7 +9,7 @@
 
       nixpkgs-stable = {
         #url = "github:NixOS/nixpkgs/staging-next";
-        url = "github:NixOS/nixpkgs?ref=nixpkgs-23.11";
+        url = "github:NixOS/nixpkgs/nixos-23.11";
       };
 
       nix-darwin = {
