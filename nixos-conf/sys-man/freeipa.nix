@@ -25,9 +25,7 @@
     enable = lib.mkDefault true;
     domain = "${config.networking.domain}";
     server = "${config.networking.fqdn}";
-    certficate = builtins.fetchTree {
-      type = "file";
-      url = "file://run/keys/root_ca.crt";
+    certficate = builtins.readFile /run/keys/root_ca.crt;
     };
   };
 
