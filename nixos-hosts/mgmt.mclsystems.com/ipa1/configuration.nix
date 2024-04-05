@@ -41,7 +41,11 @@
     openssh.enable = lib.mkForce true; # Enable the OpenSSH daemon.
     printing.enable = false;    # Change to True to Enable CUPS to print documents.
     timesyncd.servers = [ "10.2.0.164" "10.2.0.126" ];    # Override hard coded nixos NTP servers
+    step-ca = { 
+      enable = true;
+    };
   };
+   
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -57,7 +61,7 @@
 
   # environment.systemPackages   INCLUDE INCLUDE INCLUDE  #Add your packages here
   systemPackages = (with pkgs; [
-      step-ca
+      
     ]);
   };
 
