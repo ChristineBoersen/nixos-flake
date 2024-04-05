@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, nixpkgs-stable, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ../../../hardware/hyperv.nix
       ../../../nixos-conf/desk-env/kde_plasma6.nix
-      # ../../../nixos-conf/sys-man/freeipa.nix
+      #../../../nixos-conf/sys-man/freeipa.nix
     ];
 
   # Enable networking
@@ -41,11 +41,7 @@
     openssh.enable = lib.mkForce true; # Enable the OpenSSH daemon.
     printing.enable = false;    # Change to True to Enable CUPS to print documents.
     timesyncd.servers = [ "10.2.0.164" "10.2.0.126" ];    # Override hard coded nixos NTP servers
-    #step-ca = { 
-    #  enable = true;
-    #};
   };
-   
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -58,20 +54,12 @@
     etc = {
           # use this section to insert items into the etc dir. The keyname is the filename without the /etc/ prepended to the path
     };
- 
-  };
 
- environment.systemPackages = let
-    step-pkg = import (builtins.fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs/archive/9957cd48326fe8dbd52fdc50dd2502307f188b0d.tar.gz";
-        sha256 = "1l2hq1n1jl2l64fdcpq3jrfphaz10sd1cpsax3xdya0xgsncgcsi";
-    }) {};
-    
-  in   
-    (with step-pkg; [
-    step-cli
+  # environment.systemPackages   INCLUDE INCLUDE INCLUDE  #Add your packages here
+  systemPackages = (with pkgs; [
+
     ]);
-    
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
