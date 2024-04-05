@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nixpkgs-stable, ... }:
 
 {
   imports =
@@ -60,8 +60,9 @@
     };
 
   # environment.systemPackages   INCLUDE INCLUDE INCLUDE  #Add your packages here
-  systemPackages = (with pkgs; [
-     
+  systemPackages = (with nixpkgs-stable.pkgs; [
+      step-cli
+      step-ca
     ]);
   };
 
