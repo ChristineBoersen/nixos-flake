@@ -21,5 +21,12 @@
 
   };
 
-  security.ipa.enable = true;
+  security.ipa = {
+    enable = lib.mkDefault true;
+    domain = "${config.networking.domain}";
+    server = "${config.networking.fqdn}";
+    certficate = ''
+
+''
+  }
 }
