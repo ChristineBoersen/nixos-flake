@@ -26,7 +26,7 @@
     domain = "${config.networking.domain}";
     server = "${config.networking.fqdn}";
     certficate = builtins.readFile /run/keys/root_ca.crt;
-    };
   };
+  
 
 }
