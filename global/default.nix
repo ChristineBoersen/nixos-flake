@@ -75,7 +75,7 @@ with lib; {
     LC_TIME = "en_US.UTF-8";
   };
 
-  security.pki.certficates = [
+  security.pki.certificates = [
 ''
 RootCA mgmt.mclsystems.com
 ===================
