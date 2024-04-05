@@ -59,21 +59,20 @@
           # use this section to insert items into the etc dir. The keyname is the filename without the /etc/ prepended to the path
     };
 
-let
-    pkgs = import (builtins.fetchTarball {
-        url = "https://github.com/NixOS/nixpkgs/archive/9957cd48326fe8dbd52fdc50dd2502307f188b0d.tar.gz";
-    }) {};
+  step = let
+      step-pkg = import (builtins.fetchTarball {
+          url = "https://github.com/NixOS/nixpkgs/archive/9957cd48326fe8dbd52fdc50dd2502307f188b0d.tar.gz";
+      }) {};
+      
+  in {
 
-    step-pkg = pkgs.step-cli;
-in {
+  # environment.systemPackages   INCLUDE INCLUDE INCLUDE  #Add your packages here
+    systemPackages = (with step-pkg; [
+      step-cli
+      ]);
+    };
 
-# environment.systemPackages   INCLUDE INCLUDE INCLUDE  #Add your packages here
-  systemPackages = (with step-pkg; [
-     step-cli
-    ]);
   };
-
-};
   
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
