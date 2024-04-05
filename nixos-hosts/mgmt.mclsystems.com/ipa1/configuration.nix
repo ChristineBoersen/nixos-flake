@@ -57,7 +57,7 @@
 
   # environment.systemPackages   INCLUDE INCLUDE INCLUDE  #Add your packages here
   systemPackages = (with pkgs; [
-      step-ca step-cli 
+      step-ca
     ]);
   };
 
