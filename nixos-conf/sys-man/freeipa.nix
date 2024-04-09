@@ -33,7 +33,7 @@
     basedn = lib.concatStringsSep ", "  (lib.forEach (lib.splitString "." "${config.networking.domain}") (name: "DC=${name}")); # convert domain to distinguished name
     #certificate = builtins.readFile /run/keys/root_ca.crt;
     certificate = pkgs.fetchurl {
-      url = "http://${config.networking.fqdn}/config/ca.crt";
+      url = "file://run/keys/root_ca.crt";  #"http://${config.networking.fqdn}/config/ca.crt";
       sha256 = "";
     };
   };
