@@ -5,7 +5,7 @@
 { config, lib, pkgs, options, ... }:
 
 {
-  networking.firewall.allowedTCPPorts = [  ];
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 
   # broken package
   nixpkgs.config.allowBroken = true;
