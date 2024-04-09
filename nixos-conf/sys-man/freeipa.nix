@@ -6,6 +6,10 @@
 
 {
   networking.firewall.allowedTCPPorts = [  ];
+
+  # broken package
+  nixpkgs.config.allowBroken = true;
+
   environment = {
   # environment.etc
     etc = {
