@@ -26,6 +26,10 @@
     domain = "${config.networking.domain}";
     server = "${config.networking.fqdn}";
     #certificate = builtins.readFile /run/keys/root_ca.crt;
+    certificate = pkgs.fetchurl {
+      url = http://${config.networking.fqdn}/config/ca.crt;
+      sha256 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    };
   };
   
 
