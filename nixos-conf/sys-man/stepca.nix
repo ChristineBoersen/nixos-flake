@@ -18,25 +18,25 @@
     };
 
     systemPackages = (with pkgs; [
-     #step-ca
-     #step-cli
+     step-ca
+     step-cli
 
 
     ]);
 
   };
 
-  services.step-ca = {
-    enable = lib.mkDefault true;
-    address = "10.240.0.8";
-    port = 8443;
-    intermediatePasswordFile = "/run/keys/imca_ipa1_mgmt_mclsystems_com.pwd";
-    # settings = {
-    #     root = "/run/keys/root_ca.crt";
-    #     crt = "/run/keys/imca_ipa1_mgmt_mclsystems_com.crt";
-    #     key = "/run/keys/imca_ipa1_mgmt_mclsystems_com.key";
-    # };
-  };
+#   services.step-ca = {
+#     enable = lib.mkDefault false;
+#     address = "10.240.0.8";
+#     port = 8443;
+#     intermediatePasswordFile = "/run/keys/imca_ipa1_mgmt_mclsystems_com.pwd";
+#     settings = {
+#         root = "/run/keys/root_ca.crt";
+#         crt = "/run/keys/imca_ipa1_mgmt_mclsystems_com.crt";
+#         key = "/run/keys/imca_ipa1_mgmt_mclsystems_com.key";
+#     };
+#   };
 
 #   security.ipa = {
 #     enable = lib.mkDefault true;
