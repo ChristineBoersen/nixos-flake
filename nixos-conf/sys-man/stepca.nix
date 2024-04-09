@@ -27,7 +27,7 @@
   };
 
   services.step-ca = {
-    enable = lib.mkDefault false;
+    enable = lib.mkDefault true;
     address = "10.240.0.8";
     port = 443;
     intermediatePasswordFile = "/run/keys/imca_ipa1_mgmt_mclsystems_com.pwd";
