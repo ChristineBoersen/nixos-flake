@@ -30,6 +30,12 @@
     enable = lib.mkDefault true;
     address = "10.240.0.8";
     port = 8443;
+    intermediatePasswordFile = "/run/keys/imca_ipa1_mgmt_mclsystems_com.pwd";
+    settings = {
+        root = "/run/keys/root_ca.crt";
+        crt = "/run/keys/imca_ipa1_mgmt_mclsystems_com.crt";
+        key = "/run/keys/imca_ipa1_mgmt_mclsystems_com.key";
+    };
   };
 
 #   security.ipa = {
