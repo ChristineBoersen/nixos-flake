@@ -10,7 +10,8 @@
       ./hardware-configuration.nix
       ../../../hardware/hyperv.nix
       ../../../nixos-conf/desk-env/kde_plasma6.nix
-      ../../../nixos-conf/sys-man/freeipa.nix
+      ../../../nixos-conf/sys-man/stepca.nix
+      #../../../nixos-conf/sys-man/freeipa.nix
     ];
 
   # Enable networking
