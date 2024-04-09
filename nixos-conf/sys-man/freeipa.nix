@@ -24,6 +24,7 @@
   security.ipa = {
     enable = lib.mkDefault true;
     domain = "${config.networking.domain}";
+    realm = "${lib.strings.toUpper config.networking.domain}";
     server = "${config.networking.fqdn}";
     #certificate = builtins.readFile /run/keys/root_ca.crt;
     certificate = pkgs.fetchurl {
