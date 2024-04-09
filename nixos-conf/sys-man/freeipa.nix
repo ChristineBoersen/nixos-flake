@@ -30,6 +30,7 @@
     domain = "${config.networking.domain}";
     realm = "${lib.strings.toUpper config.networking.domain}";
     server = "${config.networking.fqdn}";
+    basedn = lib.concatStringsSep ", "  (lib.forEach (lib.splitString "." "${config.networking.domain}") (name: "DC=${name}")); # convert domain to distinguished name
     #certificate = builtins.readFile /run/keys/root_ca.crt;
     certificate = pkgs.fetchurl {
       url = "http://${config.networking.fqdn}/config/ca.crt";
