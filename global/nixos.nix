@@ -15,7 +15,7 @@ with lib; {
   environment = {
   # environment.etc
     etc = {
-      "udev/rules.d/50-thetisu2f.rules" = ''
+      "udev/rules.d/50-thetisu2f.rules".text = ''
 KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"'
 '';
           # use this section to insert items into the etc dir. The keyname is the filename without the /etc/ prepended to the path
