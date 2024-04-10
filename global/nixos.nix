@@ -12,14 +12,24 @@ with lib; {
   networking.networkmanager.wifi.powersave = mkDefault false;
   networking.enableIPv6 = mkDefault true;
 
-  environment.systemPackages = mkIf (config.services.xserver.enable == true) [
-    pkgs.gparted
-    #pkgs.putty
-    pkgs.freerdp
+  environment = {
+  # environment.etc
+    etc = {
+      "udev/rules.d/50-thetisu2f.rules" = ''
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"'
+'';
+          # use this section to insert items into the etc dir. The keyname is the filename without the /etc/ prepended to the path
+    };
+    
+    systemPackages = mkIf (config.services.xserver.enable == true) [
+      pkgs.gparted
+      #pkgs.putty
+      pkgs.freerdp
 
-  ];
+    ];
+  };
 
-   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   systemd.sleep.extraConfig = mkDefault ''
     AllowSuspend=no
