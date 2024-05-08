@@ -14,10 +14,26 @@
 
   services = {
     dbus.enable = true;
+
+    ## Desktop Manager
+    desktopManager = {
+      #xterm.enable = false;
+      #plasma5.enable = false;
+      plasma6 = {
+        enable = true;          
+      };
+    };
+
+    ## Display Manager
+    displayManager = {
+      defaultSession = "plasma";
+      autoLogin.enable = false;
+    };
+
     pipewire = {
       enable = true;
       alsa.enable = true;
-      #alsa.support32Bit = true;
+      alsa.support32Bit = true;
       pulse.enable = true;   # See hardware.pulseaudio.enable
       # If you want to use JACK applications, uncomment this
       #jack.enable = false;
@@ -32,20 +48,13 @@
     xserver = {
       enable = true;   # Either X11 or Wayland
 
-      ## Desktop Manager
-      desktopManager = {
-        xterm.enable = false;
-        #plasma5.enable = false;
-        plasma6 = {
-          enable = true;
-          enableQt5Integration = false;
-        };
-      };
+      
+      
 
       ## Display Manager
       displayManager = {
-        autoLogin.enable = false;
-        defaultSession = "plasma";
+        
+        
         gdm = {
           autoSuspend = false;
           enable = true;

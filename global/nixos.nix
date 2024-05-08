@@ -14,10 +14,7 @@ with lib; {
 
   environment = {
   # environment.etc
-    etc = {
-      "udev/rules.d/50-thetisu2f.rules".text = ''
-KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"'
-'';
+    etc = {    
           # use this section to insert items into the etc dir. The keyname is the filename without the /etc/ prepended to the path
     };
     
@@ -25,11 +22,15 @@ KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", GROUP="plugdev"'
       pkgs.gparted
       #pkgs.putty
       pkgs.freerdp
-
+      pkgs.pam_u2f
     ];
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  services.udev.extraRules = ''
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0664", TAG+="uaccess"
+'';
 
   systemd.sleep.extraConfig = mkDefault ''
     AllowSuspend=no

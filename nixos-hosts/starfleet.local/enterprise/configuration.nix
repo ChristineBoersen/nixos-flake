@@ -35,7 +35,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
+  programs.java.enable = true;
+  
   security.sudo.extraConfig = ''
     Defaults:ALL timestamp_timeout=15
     christine	ALL=(ALL) NOPASSWD: ALL
@@ -47,6 +48,8 @@
   # Enable sound with pipewire.
   sound.enable = true;
   sound.mediaKeys.enable = true;
+  #hardware.pulseaudio.enable = true;
+  #hardware.pulseaudio.support32Bit = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   #users.mutableUsers = false;
@@ -91,7 +94,8 @@
 
 
     # WINE and Graphics utils
-    wine #-wayland
+    wineWowPackages.waylandFull #-wayland
+    winetricks
     #vulkan-tools
     #clinfo
     #libsForQt5.kcalc
