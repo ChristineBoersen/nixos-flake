@@ -6,15 +6,10 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      #./xfce-configuration.nix
-      #./icewm-configuration.nix
-      #./sway-configuration.nix
-      ../../nixos-conf/desk-env/kde_plasma6.nix
-      #../../nixos-conf/desk-env/gnome.nix
-      #../../nixos-conf/desk-env/lxqt.nix
-    ];
+   [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix      
+      ../../../nixos-conf/desk-env/kde_plasma6.nix     
+   ];
 
 
   services.avahi.enable = true;
@@ -40,6 +35,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  programs.java.enable = true;
 
   security.sudo.extraConfig = ''
     Defaults:ALL timestamp_timeout=15
@@ -95,7 +91,8 @@
 
 
     # WINE and Graphics utils
-    wine #-wayland
+    wineWowPackages.waylandFull #-wayland
+    winetricks
     #vulkan-tools
     #clinfo
     #libsForQt5.kcalc
@@ -113,7 +110,7 @@
     blender
     openscad
     vscode-extensions.antyos.openscad
-
+    putty
 
 #  Games
     steam

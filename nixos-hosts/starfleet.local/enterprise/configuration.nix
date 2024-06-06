@@ -113,7 +113,7 @@
     blender
     openscad
     vscode-extensions.antyos.openscad
-
+    putty
 
 #  Games
     steam
