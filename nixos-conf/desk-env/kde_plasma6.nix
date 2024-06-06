@@ -34,7 +34,7 @@
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
-      pulse.enable = true;   # See hardware.pulseaudio.enable
+      pulse.enable = false;   # See hardware.pulseaudio.enable
       # If you want to use JACK applications, uncomment this
       #jack.enable = false;
     };

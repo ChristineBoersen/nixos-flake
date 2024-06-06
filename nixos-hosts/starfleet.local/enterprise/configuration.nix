@@ -18,8 +18,8 @@
   networking.domain = "starfleet.local";
   networking.extraHosts =
   ''
-      192.168.1.83 drydock
-      192.168.1.83 drydock.starfleet.local
+     # 192.168.1.83 drydock
+     # 192.168.1.83 drydock.starfleet.local
   '';
 
 
