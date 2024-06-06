@@ -87,7 +87,7 @@
     virtualbox
 
 
-    etcher
+    #etcher
 
 
     # WINE and Graphics utils
