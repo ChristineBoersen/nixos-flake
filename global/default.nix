@@ -24,6 +24,7 @@ with lib; {
     openssl     # don't assume packages bring in their own
     powershell  # so we can keep one scripting language, mostly
     usbutils
+    unrar
     unzip
     vim         # some products assume VI/VIM exists (VSCode)
     wget
