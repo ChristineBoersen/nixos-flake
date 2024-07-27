@@ -34,7 +34,9 @@
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
-      pulse.enable = false;   # See hardware.pulseaudio.enable
+      wireplumber.enable = true;
+      
+      pulse.enable = true;   # See hardware.pulseaudio.enable
       # If you want to use JACK applications, uncomment this
       #jack.enable = false;
     };
@@ -105,10 +107,15 @@ test -f ~/.xinitrc && . ~/.xinitrc
 
     systemPackages = with pkgs ;
     [
+      
       chromium
+      kmix
       plasma-pa
+      
+      
     ];
 
+    
     plasma6.excludePackages = with pkgs; [
       #kdePackages.plasma-browser-integration
       #kdePackages.oxygen

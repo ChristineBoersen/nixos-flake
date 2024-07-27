@@ -12,7 +12,11 @@
     ];
 
 
-  services.avahi.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+  };
 
   networking.hostName = "enterprise"; # Define your hostname.
   networking.domain = "starfleet.local";
@@ -48,7 +52,8 @@
   # Enable sound with pipewire.
   sound.enable = true;
   sound.mediaKeys.enable = true;
-  #hardware.pulseaudio.enable = true;
+  
+  ##hardware.pulseaudio.enable = lib.mkForce true;
   #hardware.pulseaudio.support32Bit = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -77,9 +82,9 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #openrgb-with-all-plugins
-    
+    rpi-imager
     python3
-
+    udftools
     vscode-extensions.ms-vscode.powershell
     #cantarell-fonts
     # Utilities
