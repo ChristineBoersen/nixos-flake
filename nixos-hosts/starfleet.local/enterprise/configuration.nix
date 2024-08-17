@@ -123,6 +123,7 @@
 
 #  Games
     steam
+    steam-run
   ];
 
 
